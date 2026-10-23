@@ -1,0 +1,44 @@
+# Apps that may hold a sensitive Android role without raising `role-holder`.
+# One app at a time holds each of these roles (SMS, DIALER, ASSISTANT,
+# CALL_SCREENING, CALL_REDIRECTION), so an unexpected holder can read every
+# message or place every call of the phone.
+#
+#   role:     the full role name, as `dumpsys role` prints it
+#   packages: holders that need no explanation, with why in a comment
+#
+# Add a package here when you have checked it and it is normal for this phone
+# (the vendor's own messages app, a keyboard the owner chose). Do not add an app
+# because one case explained it: that belongs in the owner's note. A holder that
+# is a system app is already skipped without this file; what is listed here are
+# the preinstalled Google and vendor apps of the phones we check.
+
+- role: android.app.role.SMS
+  packages:
+    - com.google.android.apps.messaging      # Google Messages (fallback SMS)
+    - com.samsung.android.messaging          # Samsung Messages
+    - com.google.android.apps.tachyon        # Google Meet/Duo used to hold it
+
+- role: android.app.role.DIALER
+  packages:
+    - com.google.android.dialer              # Google Phone
+    - com.android.dialer                     # AOSP Dialer
+    - com.samsung.android.dialer
+    - com.google.android.carrier
+
+- role: android.app.role.ASSISTANT
+  packages:
+    - com.google.android.googlequicksearchbox  # Google app (the assistant)
+    - com.samsung.android.bixby.agent
+
+- role: android.app.role.CALL_SCREENING
+  packages:
+    - com.google.android.dialer              # Google Phone does caller ID too
+    - com.google.android.as                  # Android System Intelligence
+
+- role: android.app.role.CALL_REDIRECTION
+  packages:
+    - com.google.android.dialer
+
+- role: android.app.role.DEVICE_POLICY_MANAGEMENT
+  packages:
+    - com.google.android.apps.work.clouddpc  # Google's work/school client

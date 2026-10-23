@@ -1,0 +1,783 @@
+# One entry per finding kind. The scripts pick the kind and the severity.
+# The report and the agent use this text. Keep it plain: the phone owner reads it.
+#
+#   title:   short name of the finding
+#   explain: why it matters, for the owner
+#   action:  what to do next, for the operator
+#   ask:     optional question for the owner; {subject} is the app or profile.
+#            Put « » around {subject} and {detail}: they come from the phone.
+#            Every red or amber finding with `ask` needs an answer before the
+#            review step can finish.
+
+# ---------------------------------------------------------------- MVT
+mvt-ioc-match:
+  title: Known spyware indicator found
+  explain: >
+    MVT found a trace that matches a published indicator of a known spyware
+    campaign (for example Pegasus or Predator). Indicators can produce false
+    positives, but this one needs expert review.
+  action: >
+    Do not reset or update the phone; that destroys evidence. Keep the case
+    folder. Contact a specialist: Amnesty Tech Security Lab, Access Now Digital
+    Security Helpline (help@accessnow.org) or Citizen Lab. Share the report only
+    over a secure channel. The owner should use another device for sensitive
+    talks until the review ends.
+
+mvt-high:
+  title: High-severity MVT alert
+  explain: >
+    MVT raised a high-severity alert that is not a direct indicator match. It
+    can be a strong sign of compromise or an unusual but harmless setting.
+  action: >
+    Read the evidence. Ask a specialist to review it before any conclusion.
+    Keep the case folder.
+
+mvt-medium:
+  title: Suspicious item flagged by MVT
+  explain: >
+    MVT flagged something unusual, for example an app installed outside the
+    store, a disabled security setting or root tools. This is not proof of
+    spyware, but it lowers the protection of the phone.
+  action: >
+    Check the item with the owner. If the owner cannot explain it, treat it as
+    amber and consider expert review.
+  ask: "MVT reported: «{detail}». Do you know why?"
+
+mvt-low:
+  title: Low-severity MVT note
+  explain: MVT recorded a minor observation. Alone, it does not suggest compromise.
+  action: No action needed unless other findings point the same way.
+
+# ---------------------------------------------------------------- apps (Android and iOS)
+stalkerware:
+  title: Stalkerware found
+  explain: >
+    This app is on a public list of stalkerware: software that someone installs
+    to read messages, track location or listen to calls without the owner
+    knowing. Usually a person with physical access to the phone installs it.
+  action: >
+    SAFETY FIRST. Do not uninstall the app and do not confront anyone yet: the
+    person who installed it may notice and react. Help the owner make a safety
+    plan with a specialist support service (Coalition Against Stalkerware lists
+    them at stopstalkerware.org). Keep the case folder as evidence.
+  ask: "Did you install «{subject}» yourself, or do you know who did? (Answer only if it is safe to talk now.)"
+
+known-malware:
+  title: Known malware or spyware
+  explain: >
+    This app matches a published indicator of Android malware, spyware or
+    stalkerware: the exact APK file, its package name or its signing key. The
+    list comes from android-sigma-rules (AndroDR), which collects indicators
+    from Amnesty, Zimperium, PRODAFT, MalwareBazaar and others.
+  action: >
+    Do not uninstall the app and do not reset the phone: that destroys
+    evidence, and if it is stalkerware the person who installed it may notice.
+    Keep the case folder. For spyware, contact Amnesty Tech Security Lab or the
+    Access Now Digital Security Helpline (help@accessnow.org). For stalkerware,
+    make a safety plan first (stopstalkerware.org lists support services).
+  ask: "Did you install «{subject}» yourself, or do you know who did? (Answer only if it is safe to talk now.)"
+
+virustotal-detections:
+  title: Antivirus engines flag this app
+  explain: >
+    VirusTotal runs about seventy antivirus engines on files that people send
+    it. Some of them flag this exact APK. One or two engines are often a false
+    alarm; many engines that agree on a name are a strong sign of malware.
+  action: >
+    Open the link in the evidence and read the names the engines give. With
+    many detections, treat it like known malware: do not uninstall yet, keep
+    the case folder and ask a specialist.
+  ask: "Where did you get «{subject}»?"
+
+stalkerware-code:
+  title: Stalkerware code inside an app
+  explain: >
+    The code inside this app matches a rule written for a known stalkerware
+    family. The app may use a different name than the original, to hide.
+  action: >
+    SAFETY FIRST. Do not uninstall the app and do not confront anyone yet: the
+    person who installed it may notice and react. Help the owner make a safety
+    plan with a specialist support service (stopstalkerware.org lists them).
+    Keep the case folder as evidence and ask a specialist to confirm the match.
+  ask: "Did you install «{subject}» yourself, or do you know who did? (Answer only if it is safe to talk now.)"
+
+apk-packed:
+  title: App with packed or hidden code
+  explain: >
+    The app hides its code with a packer or a protector. Some banking and game
+    apps do this against copying, but malware does it to escape analysis. This
+    copy comes from outside the stores, so nobody checked it.
+  action: >
+    Confirm where the owner got the app. If nobody knows, an expert can unpack
+    and review it; keep the case folder.
+
+apk-rebuilt:
+  title: App rebuilt from another app
+  explain: >
+    The code was rebuilt with dexlib (smali or apktool), the tools used to take
+    an existing app apart and put it back together. Fake copies of real apps,
+    with hidden extra code, are made this way. Mods (for example of WhatsApp)
+    are made this way too.
+  action: >
+    Confirm where the owner got the app. If it copies a known app, install the
+    real one from the store instead, after a safety plan if needed.
+
+watchware:
+  title: Monitoring app found
+  explain: >
+    This is a monitoring app (parental control, employee monitoring or remote
+    support). It is legal to sell, but it can read a lot of data and is often
+    misused to watch a partner.
+  action: >
+    Confirm with the owner that they know about it and agree with it. If not,
+    follow the stalkerware safety advice before removing it.
+  ask: "«{subject}» is a monitoring app. Did you install it, or agree to it (for example a work phone or a family app)?"
+
+apk-signature-invalid:
+  title: App signature does not verify
+  explain: >
+    The app file is not signed correctly. A modified (tampered) app often looks
+    like this.
+  action: Ask the owner where the app came from. Recommend removing it and installing the store version.
+  ask: "Where did you get «{subject}»? From the Play Store, a website, a file someone sent you?"
+
+signer-mismatch:
+  title: App signed by an unofficial key (possible fake)
+  explain: >
+    This app uses the name of a well-known app, but it is not signed with the
+    official developer key. Fake or modified copies of messaging apps are a
+    common way to spy on people.
+  action: >
+    Back up what the owner needs, uninstall this copy and install the app from
+    the official store. Change the passwords used inside the app. If the owner
+    is at risk, contact a specialist first and keep the case folder.
+  ask: "Where did you get «{subject}»? Did someone else install it or send you a link to it?"
+
+impersonation:
+  title: App that copies the name of a popular app
+  explain: >
+    The package name is very close to a popular app but is a different app.
+    Modified clones (for example 'GB WhatsApp') and fake apps use this trick.
+    They can read your chats and send them elsewhere.
+  action: >
+    Recommend removing it and using the official app from the store. If the
+    owner did not install it on purpose, treat it as stalkerware.
+  ask: "Did you install «{subject}» on purpose? Where did you get it?"
+
+looks-like-system:
+  title: Hand-installed app with a system-like name
+  explain: >
+    The app is not part of the phone system but has a name like 'system
+    service' or 'update'. Spyware hides this way.
+  action: Ask the owner. If nobody knows it, ask a specialist to review the APK in the case folder.
+  ask: "Do you recognise «{subject}»? Did you or anyone else install it by hand?"
+
+sideloaded-app:
+  title: App installed outside a store
+  explain: >
+    The app did not come from an app store. Apps from outside a store skip the
+    store's checks. Many are harmless, but this is how most Android spyware
+    arrives.
+  action: Ask the owner where the app came from. Remove it if nobody knows.
+  ask: "Do you know «{subject}»? Where did you get it?"
+
+sideloaded-store-app:
+  title: Store app installed from somewhere else
+  explain: >
+    This app exists in an app store, but this copy came from outside it. A
+    copy from a website or a file can be a modified version.
+  action: Recommend uninstalling this copy and installing the app from the store.
+  ask: "You have «{subject}», but not from an app store. Where did you get it?"
+
+unknown-origin-app:
+  title: App of unknown origin
+  explain: >
+    The app was installed by hand and is not in Google Play or F-Droid. Nobody
+    can confirm who made it.
+  action: Ask the owner. If nobody knows it, ask a specialist to review the APK in the case folder.
+  ask: "Do you recognise «{subject}»? Did you or anyone else install it?"
+
+crash-watchdog:
+  title: System process stopped by its own watchdog
+  explain: >
+    A system service hung and its watchdog stopped it on purpose. This is a
+    bug, not an attack: exploits leave memory faults, not timeouts.
+  action: No action. Updates usually fix it.
+
+webapk:
+  title: Web app installed by Chrome
+  explain: >
+    Chrome installs a small app when you add a website to the home screen. It
+    shows the website; it is not in a store by design.
+  action: No action needed. The owner can remove it if they do not use it.
+
+unreadable-package:
+  title: App whose files could not be read
+  explain: >
+    The phone did not let androidqf copy this app, so its signature could not
+    be checked. Android's private space looks like this.
+  action: No action unless other findings point to it.
+
+# ---------------------------------------------------------------- app manifests (Android)
+app-hidden:
+  title: App without an icon
+  explain: >
+    This app has no icon in the launcher, but it can still run. Classic
+    stalkerware removes its own icon on purpose so the owner never sees it.
+    Some harmless apps (web apps made by Chrome, keyboards, watch faces) also
+    have no icon by design; the evidence says whether the icon was switched
+    off or the app never had one.
+  action: >
+    SAFETY FIRST. Do not uninstall the app and do not confront anyone yet: the
+    person who installed it may notice and react. The owner should answer what
+    it is. If nobody knows, keep the case folder and ask a specialist to review
+    the APK (stopstalkerware.org lists support services).
+  ask: "There is an app called «{subject}» on the phone that has no icon. Do you know what it is?"
+
+app-label-mimics-system:
+  title: App named like a system component
+  explain: >
+    The app shows itself with a name like 'System Update Service'. Spyware
+    hides behind names the owner would never question. Real system apps also
+    carry these names, but they are not installed by hand.
+  action: Ask the owner where the app came from. If nobody knows it, review the APK in the case folder.
+  ask: "An app called «{subject}» is installed on the phone. Did you or anyone else install it?"
+
+app-boot-sms:
+  title: App that starts at boot and can read SMS
+  explain: >
+    The app wakes up by itself every time the phone starts and its manifest is
+    built to read text messages, including the codes banks and email apps use
+    to confirm logins. Legitimate apps (backup, messaging) do this too, but a
+    hand-installed app doing it needs an explanation.
+  action: Ask the owner what the app is for. If nobody knows, review the APK before removing it.
+  ask: "«{subject}» starts when the phone turns on and can read text messages. What is it for?"
+
+app-accessibility-declared:
+  title: App that contains an accessibility service
+  explain: >
+    The app has a part inside it that could read the screen and press buttons
+    (accessibility access), but that access is NOT turned on now. Many normal
+    apps carry this for automation features they never enabled. It only says
+    what the app could be made to do.
+  action: No action while the access stays off. If other findings point to this app, note it for the specialist.
+
+app-device-admin-declared:
+  title: App built to ask for administrator rights
+  explain: >
+    The app's manifest asks for device administrator rights (the power to lock
+    the phone and resist uninstalling). The rights are NOT granted now; anti-
+    theft and work apps ask for them legitimately.
+  action: No action while the rights stay ungranted. If other findings point to this app, note it for the specialist.
+
+app-surveillance-permissions:
+  title: App holding several surveillance-capable permissions
+  explain: >
+    Together, this app's permissions (messages, calls log, microphone, camera,
+    background location, contacts, notification access...) can follow what the
+    owner does and says. One of them alone is common; three or more in one app,
+    especially installed by hand, matches what stalkerware asks for.
+  action: >
+    Ask the owner what the app needs each permission for. If the answer does
+    not fit, follow the stalkerware safety advice before removing it
+    (stopstalkerware.org lists support services).
+  ask: "«{subject}» can read messages, location, microphone or camera (see evidence). What do you use it for?"
+
+app-old-target-sdk:
+  title: App built for a very old Android
+  explain: >
+    The app was built before Android 6 (2015), when Android granted every
+    permission at install time without asking. So this app has everything it
+    ever asked for, and the owner never got to say no to any of it. Abandoned
+    apps look like this; so do copies made to avoid permission prompts.
+  action: Ask where the app came from and whether a newer version exists in a store.
+  ask: "«{subject}» was built for an Android version from before 2015. Where did you get it?"
+
+# ---------------------------------------------------------------- Android system
+boot-not-verified:
+  title: Operating system not verified at boot
+  explain: >
+    The phone did not confirm at boot that its operating system is the
+    original one ('green'), or its bootloader is unlocked. Then someone can
+    install a modified system that hides spyware. People who install a custom
+    system (for example LineageOS) unlock it on purpose.
+  action: >
+    If the owner did not unlock it, a specialist should review the phone. Do
+    not reset it before that: a reset keeps an unlocked bootloader unlocked.
+  ask: "Did you, or someone you know, unlock the bootloader or install another system on this phone?"
+
+debug-build:
+  title: Test build of the operating system
+  explain: >
+    The phone runs a test (debug) build. Test builds are not for normal use
+    and let a connected computer take full control.
+  action: Ask where the phone or its system comes from. A specialist should review it if nobody knows.
+  ask: "Where did you get this phone, and did anyone install its system for you?"
+
+selinux-not-enforcing:
+  title: SELinux protection is off
+  explain: >
+    SELinux keeps apps apart from each other and from the system. On a normal
+    phone it is always 'Enforcing'. Off means a modified or rooted system.
+  action: A specialist should review the phone. Keep the case folder.
+
+global-proxy:
+  title: All web traffic goes through a proxy
+  explain: >
+    A global proxy sends the phone's web traffic through another computer,
+    which can see or change it. Some companies set one up; spyware can too.
+  action: Confirm who set it. If nobody knows, remove it in the Wi-Fi or network settings after a safety plan.
+  ask: "Web traffic goes through the proxy «{subject}». Did you or your work set it up?"
+
+wifi-adb:
+  title: Wireless debugging is on
+  explain: >
+    With wireless debugging, a computer on the same network can install apps
+    and read data without a cable.
+  action: Turn it off in Developer options unless the owner uses it.
+  ask: "Wireless debugging is on. Did you turn it on yourself?"
+
+private-dns:
+  title: Private DNS server set
+  explain: >
+    Private DNS sends every name lookup (the sites and services the phone
+    contacts) to one server. Many people choose one for privacy or ad
+    blocking.
+  action: Confirm the owner recognises the server.
+
+# ---------------------------------------------------------------- Android accounts, roles, users
+accounts-review:
+  title: Check the accounts on the phone
+  explain: >
+    The check counted the accounts signed in on the phone (it never copies
+    their names or addresses). A second Google account added by somebody else is
+    the usual way to follow a phone from outside: Find My Device, the location
+    history and Family Link all work through an account, not through an app.
+  action: >
+    Do not write the account names down anywhere. Have the owner read them on
+    the phone itself, in Settings > Passwords & accounts, and remove any account
+    they do not use. If an unfamiliar account exists and someone else has had
+    the phone, follow the stalkerware safety advice before removing it
+    (stopstalkerware.org lists support services).
+  ask: "The check counted the accounts but never copied them, so I cannot name them. Open Settings > Passwords & accounts on the phone and tell me whether you recognise every account there."
+
+role-holder:
+  title: App holding a core phone role
+  explain: >
+    Android lets one app at a time be the messages app, the dialer, the
+    assistant, or the app that screens and redirects calls. Whoever holds one of
+    those roles sees exactly what the owner sends and says, and Android shows
+    the choice in one place only (Settings > Apps > Default apps), where nobody
+    looks twice.
+  action: >
+    Ask the owner which app they chose for that job. If it is not theirs, do not
+    uninstall it yet: the person who set it up may notice. Note the evidence,
+    help the owner pick the app they want as default, and if anyone has had
+    physical access to the phone, follow the stalkerware safety advice first
+    (stopstalkerware.org lists support services).
+  ask: "«{subject}» is set as the app for one of these jobs: reading text messages, making calls, or screening calls. Is that an app you chose?"
+
+supervision-active:
+  title: Phone under parental or school supervision
+  explain: >
+    A supervision service (Google Family Link, a school account) is active on
+    this phone. It can set rules over which apps open, see what happens on the
+    phone and where it is. It is normal for a child's phone and it cannot be
+    turned off from the phone alone.
+  action: >
+    Confirm who set it up and that the owner agrees with it. If the owner is an
+    adult who did not agree, this is monitoring: keep the case folder and follow
+    the stalkerware safety advice (stopstalkerware.org lists support services).
+  ask: "Is this phone supervised by a parent or a school? Did you agree to that?"
+
+work-profile:
+  title: Work profile on the phone
+  explain: >
+    The phone holds a separate managed (work) profile: a set of apps and settings
+    an organisation controls. It can see only what is inside that profile, not
+    the owner's private apps, but it can wipe its own part at any time.
+  action: >
+    Confirm the owner knows which organisation manages it. If they do not, ask a
+    specialist to look at the device-management app in the evidence before
+    removing anything.
+  ask: "Your phone has a work profile. Does your employer or school manage this phone, and did you set that up?"
+
+multiple-users:
+  title: More than one user on the phone
+  explain: >
+    Several separate user profiles live on this phone. Each one has its own apps,
+    accounts and files, invisible from the others. Some people share a phone with
+    a relative this way; it is also how somebody can keep a hidden profile with
+    their own messaging apps on the owner's phone.
+  action: >
+    Ask the owner who the other profile belongs to. Check them on the phone in
+    Settings > System > Multiple users (the check never copies profile names).
+
+device-owner:
+  title: An app owns the whole phone (device owner)
+  explain: >
+    One app is the device owner: it sets the security rules for the entire phone,
+    decides which apps may run and cannot be uninstalled by the owner. Companies
+    and schools do this on phones they hand out; so does anyone who configures a
+    phone for somebody else and wants to keep control of it.
+  action: >
+    Ask who gave the phone to the owner and whether they still have the account
+    that manages it. If the owner bought and set up the phone themselves, treat
+    this as monitoring: keep the case folder and get specialist advice before
+    removing the ownership (it needs a factory reset).
+  ask: "«{subject}» manages your whole phone. Did your employer or school give you this phone, or did someone set it up for you?"
+
+# ---------------------------------------------------------------- Android capabilities
+accessibility-service:
+  title: App with accessibility access
+  explain: >
+    Accessibility access lets an app read everything on screen and press
+    buttons. Password managers and some tools need it, but stalkerware and
+    banking trojans use it too.
+  action: If the owner does not use this app for that purpose, turn the access off and remove the app.
+  ask: "«{subject}» can read your screen (accessibility). Do you use this app, and do you know why it needs that?"
+
+notification-listener:
+  title: App that reads all notifications
+  explain: >
+    This app can read every notification, including message previews and
+    one-time codes.
+  action: If the owner does not need it, turn the access off in Settings > Notifications.
+  ask: "«{subject}» can read all your notifications. Do you use this app?"
+
+input-method:
+  title: Third-party keyboard
+  explain: >
+    The keyboard sees everything you type, including passwords. A keyboard from
+    outside the store is a serious risk.
+  action: If the owner did not choose this keyboard, switch back to the default and remove it.
+  ask: "Your keyboard is «{subject}». Did you choose it?"
+
+always-on-vpn:
+  title: Always-on VPN
+  explain: >
+    All internet traffic of the phone goes through this app. A trusted VPN is
+    fine; an unknown one can watch your traffic.
+  action: Confirm the owner chose this VPN.
+  ask: "All your traffic goes through «{subject}» (VPN). Did you set this up?"
+
+device-admin:
+  title: App with device administrator rights
+  explain: >
+    Device administrator apps can lock or wipe the phone and are hard to
+    uninstall. Work management apps use this. Spyware uses it to stay installed.
+  action: If it is not a work or anti-theft app the owner knows, remove its admin rights and uninstall it.
+  ask: "«{subject}» has administrator rights on your phone. Is this a work phone or an app you set up?"
+
+play-protect-off:
+  title: Google Play Protect is off
+  explain: >
+    Play Protect scans apps for malware. Stalkerware installers often ask to
+    turn it off so the spy app is not detected.
+  action: Turn Play Protect on again (Play Store > profile > Play Protect) after the review.
+  ask: "Google Play Protect is off. Did you turn it off yourself, or did someone ask you to?"
+
+root-tools:
+  title: Rooting tools found
+  explain: >
+    The phone has tools that give full control over the system (root). This
+    removes Android's main protections. Some people root on purpose; spyware
+    installers sometimes do it too.
+  action: If the owner did not root the phone on purpose, ask a specialist to review it.
+  ask: "MVT reported: «{detail}». Did you root this phone on purpose?"
+
+outdated-os:
+  title: Phone missing security updates
+  explain: >
+    The phone has not received security updates for a long time. Known holes
+    stay open, and some spyware uses exactly these.
+  action: >
+    Install all pending updates after the check. If the maker no longer sends
+    updates, recommend a supported phone for an at-risk owner.
+
+ioc-domain-in-app:
+  title: App code names a known spyware domain
+  explain: >
+    The code of this app contains a domain name that a published spyware or
+    stalkerware indicator lists (MVT's indicator files, from Amnesty and
+    others). Spyware often keeps the address of its server in its code. A name
+    in the code is not proof of a connection: blockers and antivirus apps carry
+    lists of bad domains on purpose, which is why an app with many matches is
+    only informative.
+  action: >
+    Do not uninstall the app and do not reset the phone: that destroys
+    evidence. Keep the case folder; the specialist can check which indicator
+    matched and whether the app is a blocker or an antivirus.
+  ask: "Do you know the app «{subject}»? Did you install it yourself?"
+
+c2-domain:
+  title: App code contains a known command server
+  explain: >
+    ThreatFox, run by the non-profit abuse.ch, lists this domain as a server
+    that controls malware, and the app's code contains it. The app was
+    installed from outside a store.
+  action: >
+    Do not uninstall the app and do not reset the phone: that destroys
+    evidence, and if it is stalkerware the person who installed it may notice.
+    Keep the case folder and contact a specialist (Amnesty Tech Security Lab,
+    or the Access Now helpline: help@accessnow.org).
+  ask: "Did you install «{subject}» yourself, or do you know who did? (Answer only if it is safe to talk now.)"
+
+app-behaviour:
+  title: Code that can spy
+  explain: >
+    Quark-Engine followed the app's code and found it can do several spying
+    things at once (send or read SMS, get the location, record audio, hide its
+    icon, read contacts, upload files). It ran because the app already had
+    another warning sign. Messaging apps can do some of these things too.
+  action: >
+    Do not uninstall the app yet. Keep the case folder: the specialist can
+    read Quark's detail in apk-scan.json and mvt-results/quark/.
+  ask: "Do you know the app «{subject}»? Did you install it yourself?"
+
+installed-near-suspicion:
+  title: Installed when the worries started
+  explain: >
+    This app was installed within two weeks of the date the owner gave in the
+    interview for when they started to worry. Timing alone proves nothing, but
+    stalkerware is installed by somebody at a given moment.
+  action: >
+    Ask the owner whether they installed it. If they did not, keep the case
+    folder and treat the app like an unknown one: do not uninstall it yet.
+  ask: "«{subject}» was installed around the time you started to worry. Do you remember installing it?"
+
+outdated-os-exploited:
+  title: Security patch older than fixes for exploited holes
+  explain: >
+    CISA, the US cyber-security agency, lists vulnerabilities that attackers
+    already use. The Android security bulletins say which patch level fixes
+    each one. This phone's patch is older than some of those fixes, so those
+    holes are still open on it. Commercial spyware uses exactly this kind of
+    hole. It does not mean the phone was attacked.
+  action: >
+    Install every pending system update after the check (Settings > System >
+    Software update, and Settings > Security > Google Play system update). If
+    the maker sends no more updates, recommend a supported phone for an
+    at-risk owner. The specialist can see which vulnerabilities are listed.
+
+# ---------------------------------------------------------------- iOS
+ios-mdm-app:
+  title: App installed by device management
+  explain: A device management (MDM) server installed this app. That is normal on a work phone and strange on a personal one.
+  action: Confirm the owner knows which organisation manages the phone.
+  ask: "«{subject}» was installed by a management server. Is this a work or school phone?"
+
+ios-app-not-in-store:
+  title: App no longer in the App Store
+  explain: The app came from the App Store but is not there now in this country. Apps get removed for many reasons, most harmless.
+  action: No action unless other findings point to it.
+
+ios-mdm-profile:
+  title: Phone enrolled in device management (MDM)
+  explain: >
+    A management profile gives an organisation control over the phone: install
+    apps, change settings, sometimes see traffic. Normal on a work phone, very
+    suspicious on a personal one.
+  action: If the owner does not know the organisation, remove the profile in Settings > General > VPN & Device Management, after a safety check.
+  ask: "Your iPhone is managed by «{subject}». Do you know this organisation (work, school)?"
+
+ios-root-certificate:
+  title: Extra trusted certificate installed
+  explain: >
+    An extra root certificate lets whoever holds it read encrypted traffic
+    (web, apps) from this phone. Some companies use it; attackers use it too.
+  action: If the owner does not know why it is there, remove the profile that installed it.
+  ask: "A profile called «{subject}» adds a trusted certificate. Did your work or school install it?"
+
+ios-vpn-profile:
+  title: VPN configuration profile
+  explain: A profile sets up a VPN. A trusted VPN is fine; an unknown one can watch your traffic.
+  action: Confirm the owner chose this VPN.
+  ask: "A profile called «{subject}» sets up a VPN. Did you install it?"
+
+ios-config-profile:
+  title: Configuration profile installed
+  explain: A configuration profile changes phone settings. Most are harmless (Wi-Fi, mail), but the owner should know each one.
+  action: Confirm the owner recognises it; remove it otherwise.
+  ask: "Do you recognise the profile «{subject}»?"
+
+ios-enterprise-app:
+  title: App installed with an enterprise certificate
+  explain: >
+    A provisioning profile signed this phone's apps with an enterprise
+    certificate: those apps never go through Apple's review or the App Store.
+    Companies legitimately do this for their own apps; anyone who wants to put
+    hidden software on a phone uses the same door, because it needs no Apple
+    account and no approval.
+  action: >
+    Match each app installed this way (see the profile name in the evidence)
+    with an app the owner recognises. If none does, treat it like stalkerware:
+    do not uninstall yet, keep the case folder, follow stopstalkerware.org
+    safety advice.
+  ask: "«{subject}» is a signing certificate that put apps on your iPhone outside the App Store. Do you know this company or app?"
+
+ios-developer-app:
+  title: App built and signed for this phone by a developer
+  explain: >
+    A developer profile lists this phone's identifier and lets someone install
+    an app they compiled themselves onto exactly this device. Normal only if
+    the owner (or a developer friend) builds and tests apps. Someone who had
+    physical access can side-load an app for this phone without Apple seeing it.
+  action: >
+    Ask who wrote and installed the app. If nobody, follow the stalkerware
+    safety advice before removing anything; keep the case folder so a
+    specialist can look at the profile and the app.
+  ask: "«{subject}» lets someone install hand-built apps on your iPhone. Do you (or someone you know) develop apps for this phone?"
+
+ios-provision-expired:
+  title: Expired provisioning profile
+  explain: >
+    A signing profile that put apps on this phone has expired. The apps it
+    signed usually keep working. An expired enterprise or developer profile is
+    still worth matching with the apps the owner knows.
+  action: No action by itself. Read which app it signs in the evidence.
+
+ios-app-not-store-signed:
+  title: App not signed by the App Store
+  explain: >
+    iPhone apps are normally re-signed by Apple when they come from the App
+    Store. This app was signed another way and no installed provisioning
+    profile explains it, so where it came from is unknown. That is the iOS
+    equivalent of an Android app installed from outside a store.
+  action: Ask the owner what the app does and where it came from. If nobody knows it, keep the case folder and ask a specialist.
+  ask: "Do you know «{subject}»? It did not come from the App Store. Where did you get it?"
+
+ios-app-hidden:
+  title: Hidden app on the iPhone
+  explain: >
+    iOS keeps this app installed but shows no icon for it anywhere. The system
+    hides some apps by design, and a profile can hide one too; classic
+    stalkerware wants exactly this: running while the owner never sees it.
+  action: >
+    SAFETY FIRST. Do not uninstall and do not confront anyone yet. If the
+    owner cannot explain the app, keep the case folder and follow the
+    stalkerware safety advice (stopstalkerware.org lists support services).
+  ask: "There is an app called «{subject}» on your iPhone that has no icon. Do you know what it is?"
+
+ios-app-entitlements:
+  title: App with special system permissions
+  explain: >
+    Apple grants this app abilities ordinary apps cannot get (a VPN that sees
+    all traffic, screen capture, reading the phone's name). Several are
+    perfectly normal for their kind of app; the list is context, not an
+    accusation.
+  action: Read the entitlements in the evidence. No action unless other findings point to the same app.
+
+ios-crash-pattern:
+  title: Repeating crashes of a phone process
+  explain: >
+    The same system process crashed several times in a month. Amnesty (during
+    the Pegasus investigations) and Kaspersky (Triangulation) found repeating
+    crashes of exactly these processes during spyware exploitation — but normal
+    phones crash like this too, so this is context for a specialist, not proof.
+  action: >
+    No question for the owner (nobody can explain a crash). If other iOS
+    findings point the same way, send the crash logs in the case folder to a
+    specialist; keep everything.
+
+ios-crash-unknown-process:
+  title: Crash of a process we do not know
+  explain: >
+    A process crashed that is neither a known iOS daemon nor an app on this
+    phone. iOS has hundreds of daemons, so an unknown name usually only means
+    our list of known names is incomplete; spyware running under a strange
+    name looks the same, which is why it stays in the report as information.
+  action: No question for the owner. If several unknown names appear, or one matches another finding, give the crash logs to a specialist.
+
+ios-app-not-listed:
+  title: App in the sysdiagnose but not in the app list
+  explain: >
+    The sysdiagnose shows this app in the App Store history, the privacy
+    permission database or iCloud folders, but the phone's app list does not
+    have it. Usually it was removed. An app that was granted a privacy
+    permission and is now missing from the list deserves a closer look.
+  action: >
+    Ask the owner whether they had this app. If not, keep the case folder for
+    a specialist.
+  ask: "The phone's records mention the app «{subject}», which is no longer installed. Did you use it?"
+
+ios-crash-suspicious-path:
+  title: Crashed process from a spyware folder
+  explain: >
+    A crash report comes from a program running out of /private/var/tmp/,
+    /private/var/db/ or /tmp/. Kaspersky found Pegasus, Reign and Predator
+    running from those folders; normal apps never do. Same rule as the reboot
+    log check, now on the live crash logs.
+  action: >
+    Do not reset or update the phone; that destroys evidence. Keep the case
+    folder and the crash logs. Contact a specialist: Amnesty Tech Security
+    Lab, Access Now Digital Security Helpline (help@accessnow.org) or Citizen
+    Lab. The owner should use another device for sensitive talks until the
+    review ends.
+
+ios-suspicious-process-path:
+  title: Process from a spyware folder
+  explain: >
+    A process ran from /private/var/db/, /private/var/tmp/ or /tmp/. The
+    evidence says where it was seen: the reboot log (shutdown.log) or the
+    process lists of the whole sysdiagnose (saf). Kaspersky found Pegasus,
+    Reign and Predator in these folders. Normal apps do not run from them.
+  action: >
+    Do not reset or update the phone; that destroys evidence. Keep the case
+    folder and the sysdiagnose. Contact a specialist: Amnesty Tech Security
+    Lab, Access Now Digital Security Helpline (help@accessnow.org) or Citizen Lab.
+
+# Older cases call this finding ios-shutdown-path; the text is the same.
+ios-shutdown-path:
+  title: Process from a spyware folder at reboot
+  explain: >
+    When the iPhone restarted, a process was running from /private/var/db/ or
+    /private/var/tmp/. Kaspersky found Pegasus, Reign and Predator there in
+    the reboot log (shutdown.log). Normal apps do not run from these folders.
+  action: >
+    Do not reset or update the phone; that destroys evidence. Keep the case
+    folder and the sysdiagnose. Contact a specialist: Amnesty Tech Security
+    Lab, Access Now Digital Security Helpline (help@accessnow.org) or Citizen Lab.
+
+ios-shutdown-delay:
+  title: Reboots slowed down by processes that did not stop
+  explain: >
+    At several reboots, the iPhone waited 3 or more times for processes that
+    did not stop. Kaspersky saw this with spyware, but a stuck normal app can
+    also cause it.
+  action: Read the process names in the evidence. Ask a specialist if any name is unknown.
+
+sysdiagnose-skipped:
+  title: No sysdiagnose
+  explain: The check did not get a sysdiagnose, so it could not read the reboot log.
+  action: If the case needs it, repeat with a sysdiagnose.
+
+sysdiagnose-no-shutdown-log:
+  title: Sysdiagnose without a reboot log
+  explain: The sysdiagnose has no shutdown.log, so the reboot checks did not run.
+  action: No action. Repeat later if the case needs it.
+
+sysdiagnose-few-reboots:
+  title: Few reboots in the log
+  explain: >
+    The reboot log only covers past restarts. With few of them, the reboot
+    checks see little. Restarting the phone every day helps future checks.
+  action: Tell the owner that a daily restart helps; it also stops some spyware.
+
+# ---------------------------------------------------------------- process
+acquisition-incomplete:
+  title: Part of the data could not be collected
+  explain: Some data could not be copied from the phone. The check is less complete.
+  action: Read the error. If it matters for the case, repeat the acquisition.
+
+acquisition-integrity:
+  title: Acquisition integrity problem
+  explain: >
+    The copy of the phone data cannot be shown to be intact: some files do not match the
+    hashes recorded when they were collected, or no hashes were recorded at all.
+  action: Repeat the acquisition before trusting the result.
+
+no-indicators:
+  title: No spyware indicators loaded
+  explain: MVT ran without the list of known spyware traces, so it could not look for them.
+  action: Run ./sta update-kb with network access, then repeat analyze, check-apps, triage and report.

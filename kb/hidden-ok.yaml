@@ -1,0 +1,7 @@
+# Packages that may have no launcher icon without raising app-hidden (task 1).
+# fnmatch patterns, matched against the package name. Add an entry only for an
+# app class whose members never show an icon by design: Chrome webapps, phone
+# keyboards (the LatinIME ones declare no LAUNCHER activity), Android Auto or
+# Wear apps installed as companions. Do not add an app just because one case
+# explained it: that belongs in the owner's note, not here.
+- org.chromium.webapk.*

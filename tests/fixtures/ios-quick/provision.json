@@ -1,0 +1,33 @@
+[
+  {
+    "Name": "Example Enterprise In-House",
+    "UUID": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "TeamName": "Example Corporation",
+    "TeamIdentifier": ["MM0EXAMPLE"],
+    "AppIDName": "Example Secure Notes",
+    "CreationDate": "2026-01-05T09:00:00",
+    "ExpirationDate": "2029-01-05T09:00:00",
+    "ProvisionsAllDevices": true,
+    "Entitlements": {
+      "application-identifier": "MM0EXAMPLE.*",
+      "com.apple.developer.team-identifier": "MM0EXAMPLE",
+      "get-task-allow": false
+    },
+    "DeveloperCertificates": [{"$hex": "30820123456789abcdef"}]
+  },
+  {
+    "Name": "Jane's test build (expired)",
+    "UUID": "ffffffff-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "TeamName": "Independent Developer",
+    "TeamIdentifier": ["DEV0EXAMPLE"],
+    "AppIDName": "Dev App",
+    "CreationDate": "2020-01-01T09:00:00",
+    "ExpirationDate": "2020-06-01T09:00:00",
+    "ProvisionedDevices": ["00008110-0000000000000000"],
+    "Entitlements": {
+      "application-identifier": "DEV0EXAMPLE.com.example.devapp",
+      "com.apple.security.application-groups": ["group.com.example.devapp"],
+      "get-task-allow": true
+    }
+  }
+]

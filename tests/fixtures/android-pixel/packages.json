@@ -1,0 +1,1331 @@
+[
+ {
+  "name": "com.android.emergency",
+  "files": [
+   {
+    "path": "/system_ext/app/EmergencyInfoGoogleNoUi/EmergencyInfoGoogleNoUi.apk",
+    "local_name": "",
+    "md5": "3845dd61b7fcc321591e8bfcd6957b0e",
+    "sha1": "c0635049adafe754fce0968e0af76a51dbb12ba9",
+    "sha256": "8eb0dd11b355af319fbc52c90a497cd92db49d1ebd805be449924af4d4d02ccd",
+    "sha512": "9bac1b2f7d5209deefb8483d870790ac41732b1072f1c823acabff5e81dae5b9",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "d2d9d47fb73a332d8bba56ee4760593e",
+     "Sha1": "33a69ac69f852762f2c09c87195729a8e34484e7",
+     "Sha256": "9be52060e32ed2a5ebcddd1709b5638f2a04bb58d2c48d2a7c58a69f724cbdb8",
+     "ValidFrom": "2023-03-08T18:44:24Z",
+     "ValidTo": "2053-03-08T18:44:24Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 419410671155700083114234876484398436078545865148
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10000,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "com.android.shell",
+  "files": [
+   {
+    "path": "/system/priv-app/Shell/Shell.apk",
+    "local_name": "",
+    "md5": "dbc350fedfeaa59ffc31c3ce1ae623ba",
+    "sha1": "c7169006245c2c043fca481a86828a029b09ff70",
+    "sha256": "795ef724a43119c449faadd4b0400c670bf21889f0d7609baeef69c39d100023",
+    "sha512": "c031c646e951101278c96c58a80b2eaf7dd2cf63373a2cda8135b78f17edde17",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "d2d9d47fb73a332d8bba56ee4760593e",
+     "Sha1": "33a69ac69f852762f2c09c87195729a8e34484e7",
+     "Sha256": "9be52060e32ed2a5ebcddd1709b5638f2a04bb58d2c48d2a7c58a69f724cbdb8",
+     "ValidFrom": "2023-03-08T18:44:24Z",
+     "ValidTo": "2053-03-08T18:44:24Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 419410671155700083114234876484398436078545865148
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10001,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "org.example.conference.wifisetup",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.example.conference.wifisetup-X/base.apk",
+    "local_name": "",
+    "md5": "707f687bb01edb0b548b03735736ceda",
+    "sha1": "c876cd9c9cdd1587e80fbfaa0699d13e29b12765",
+    "sha256": "5a924b8618fd5685823d5570c9d93dda8a0a5c9fc54a20db599aade17127bfd7",
+    "sha512": "4f732ae3940d9e178d377a0db0fa3fb5c2bec3076b6ecccf4c8fcd1f6bbc3017",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee1be52c5699d4c54ca0cc90c56e40bc",
+     "Sha1": "07015fd416880be31ec8e48dda1fc9b3e5989adb",
+     "Sha256": "456b5aa806e1a8d4945b7607ceb20d589e0e70e58bdf61a1d6b658fe3c74a016",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=org.example.conference.wifisetup",
+     "Subject": "CN=org.example.conference.wifisetup",
+     "SignatureAlgorithm": "SHA1-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.google.android.packageinstaller",
+  "uid": 10002,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "com.google.android.inputmethod.latin",
+  "files": [
+   {
+    "path": "/data/app/~~X/com.google.android.inputmethod.latin-X/base.apk",
+    "local_name": "",
+    "md5": "8873e5aaa9e1e268946e9886a48b5547",
+    "sha1": "f28998fb445aec07439bb38b836afb3eebc4783b",
+    "sha256": "6065d058505b0f65e6caef81910f9d9f84aafe0c2414e4fe3b969e9a5419a8f6",
+    "sha512": "c8abb9dd6c46b7b12d0825591de58d369b3a85ce96186acae2db9dd81f8ceddd",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "f026fdcf21375f987164c84da76ef5fd",
+     "Sha1": "bd32424203e0fb25f36b57e5aa356f9bdd1da998",
+     "Sha256": "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053",
+     "ValidFrom": "2020-03-09T19:57:01Z",
+     "ValidTo": "2050-03-09T19:57:01Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 94430156387871767515727309924577473117736790889
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.inputmethod.latin-X/split_brella_feature_split.apk",
+    "local_name": "",
+    "md5": "8873e5aaa9e1e268946e9886a48b5547",
+    "sha1": "f28998fb445aec07439bb38b836afb3eebc4783b",
+    "sha256": "6065d058505b0f65e6caef81910f9d9f84aafe0c2414e4fe3b969e9a5419a8f6",
+    "sha512": "c8abb9dd6c46b7b12d0825591de58d369b3a85ce96186acae2db9dd81f8ceddd",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "f026fdcf21375f987164c84da76ef5fd",
+     "Sha1": "bd32424203e0fb25f36b57e5aa356f9bdd1da998",
+     "Sha256": "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053",
+     "ValidFrom": "2020-03-09T19:57:01Z",
+     "ValidTo": "2050-03-09T19:57:01Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 94430156387871767515727309924577473117736790889
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.inputmethod.latin-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "8873e5aaa9e1e268946e9886a48b5547",
+    "sha1": "f28998fb445aec07439bb38b836afb3eebc4783b",
+    "sha256": "6065d058505b0f65e6caef81910f9d9f84aafe0c2414e4fe3b969e9a5419a8f6",
+    "sha512": "c8abb9dd6c46b7b12d0825591de58d369b3a85ce96186acae2db9dd81f8ceddd",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "f026fdcf21375f987164c84da76ef5fd",
+     "Sha1": "bd32424203e0fb25f36b57e5aa356f9bdd1da998",
+     "Sha256": "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053",
+     "ValidFrom": "2020-03-09T19:57:01Z",
+     "ValidTo": "2050-03-09T19:57:01Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 94430156387871767515727309924577473117736790889
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.inputmethod.latin-X/split_dictation_feature_split.apk",
+    "local_name": "",
+    "md5": "8873e5aaa9e1e268946e9886a48b5547",
+    "sha1": "f28998fb445aec07439bb38b836afb3eebc4783b",
+    "sha256": "6065d058505b0f65e6caef81910f9d9f84aafe0c2414e4fe3b969e9a5419a8f6",
+    "sha512": "c8abb9dd6c46b7b12d0825591de58d369b3a85ce96186acae2db9dd81f8ceddd",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "f026fdcf21375f987164c84da76ef5fd",
+     "Sha1": "bd32424203e0fb25f36b57e5aa356f9bdd1da998",
+     "Sha256": "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053",
+     "ValidFrom": "2020-03-09T19:57:01Z",
+     "ValidTo": "2050-03-09T19:57:01Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 94430156387871767515727309924577473117736790889
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.inputmethod.latin-X/split_tenoranimation_feature_split.apk",
+    "local_name": "",
+    "md5": "8873e5aaa9e1e268946e9886a48b5547",
+    "sha1": "f28998fb445aec07439bb38b836afb3eebc4783b",
+    "sha256": "6065d058505b0f65e6caef81910f9d9f84aafe0c2414e4fe3b969e9a5419a8f6",
+    "sha512": "c8abb9dd6c46b7b12d0825591de58d369b3a85ce96186acae2db9dd81f8ceddd",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "f026fdcf21375f987164c84da76ef5fd",
+     "Sha1": "bd32424203e0fb25f36b57e5aa356f9bdd1da998",
+     "Sha256": "7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053",
+     "ValidFrom": "2020-03-09T19:57:01Z",
+     "ValidTo": "2050-03-09T19:57:01Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 94430156387871767515727309924577473117736790889
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10003,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "org.chromium.webapk.0123456789abcdef0_v2",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.chromium.webapk.0123456789abcdef0_v2-X/base.apk",
+    "local_name": "",
+    "md5": "0915f72cf877fe00d2abc94763ca0b08",
+    "sha1": "81c97d2161531a6df9e7c28c5f3ef4572559e9af",
+    "sha256": "c2221bbca4c8603c6bd6dda75445b91b2c69cb02a3933abc1450072278ca472a",
+    "sha512": "2373ebf504c8e270fd9bfed20eba07a0abe453c068820b3ba7ce8040ef2553fa",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "2f00de95cadee811de78d7e85860399d",
+     "Sha1": "914aecc34d66f5bac51a0e933ad2e0ae30e1e966",
+     "Sha256": "f58659c19714108dec47e3c4ed162429a5a0889c2ffa32e4b01ddb3b9996aa23",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=org.chromium.webapk.0123456789abcdef0_v2",
+     "Subject": "CN=org.chromium.webapk.0123456789abcdef0_v2",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.android.chrome",
+  "uid": 10004,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "com.android.settings",
+  "files": [
+   {
+    "path": "/system_ext/priv-app/SettingsGoogle/SettingsGoogle.apk",
+    "local_name": "",
+    "md5": "93702a7d58e94da79dce95811ef21784",
+    "sha1": "125468df973d797318ea3c8d5180deabd44f7555",
+    "sha256": "5ba341fa42f3c6139dd8101cb506170b68b93bf61e029ebc14f47bd677bb797c",
+    "sha512": "78bf50929c25e2d3a6ff813f420a475398f3b1cc7cef5a83382ff00acdc20162",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "d2d9d47fb73a332d8bba56ee4760593e",
+     "Sha1": "33a69ac69f852762f2c09c87195729a8e34484e7",
+     "Sha256": "9be52060e32ed2a5ebcddd1709b5638f2a04bb58d2c48d2a7c58a69f724cbdb8",
+     "ValidFrom": "2023-03-08T18:44:24Z",
+     "ValidTo": "2053-03-08T18:44:24Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 419410671155700083114234876484398436078545865148
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10005,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "org.thoughtcrime.securesms",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.thoughtcrime.securesms-X/base.apk",
+    "local_name": "",
+    "md5": "451e770d0be6417c4b5dae983cd3720d",
+    "sha1": "9a439ebcfae4ffe5326155ee0ac9befe0883d7d5",
+    "sha256": "913a3f3e51fc9fc362b67ac2b094e628410da68d4e9ccbebdbd6256fded94d19",
+    "sha512": "7bcbf3831990975cb64f30354391e2262ff4f6981d668f25630e23277f8b0771",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "34ac0b4e5d2c5c08b704fc05874f9a10",
+     "Sha1": "5c6740091301285db5409fdcd1b90f1ac3ba2dcf",
+     "Sha256": "4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8",
+     "ValidFrom": "2023-11-14T17:23:56Z",
+     "ValidTo": "2050-12-31T17:23:56Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 52236069294067056038100805893073402523117106810
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.thoughtcrime.securesms-X/split_config.arm64_v8a.apk",
+    "local_name": "",
+    "md5": "451e770d0be6417c4b5dae983cd3720d",
+    "sha1": "9a439ebcfae4ffe5326155ee0ac9befe0883d7d5",
+    "sha256": "913a3f3e51fc9fc362b67ac2b094e628410da68d4e9ccbebdbd6256fded94d19",
+    "sha512": "7bcbf3831990975cb64f30354391e2262ff4f6981d668f25630e23277f8b0771",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "34ac0b4e5d2c5c08b704fc05874f9a10",
+     "Sha1": "5c6740091301285db5409fdcd1b90f1ac3ba2dcf",
+     "Sha256": "4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8",
+     "ValidFrom": "2023-11-14T17:23:56Z",
+     "ValidTo": "2050-12-31T17:23:56Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 52236069294067056038100805893073402523117106810
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.thoughtcrime.securesms-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "451e770d0be6417c4b5dae983cd3720d",
+    "sha1": "9a439ebcfae4ffe5326155ee0ac9befe0883d7d5",
+    "sha256": "913a3f3e51fc9fc362b67ac2b094e628410da68d4e9ccbebdbd6256fded94d19",
+    "sha512": "7bcbf3831990975cb64f30354391e2262ff4f6981d668f25630e23277f8b0771",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "34ac0b4e5d2c5c08b704fc05874f9a10",
+     "Sha1": "5c6740091301285db5409fdcd1b90f1ac3ba2dcf",
+     "Sha256": "4be4f6cd5be844083e900279dc822af65a547fecc26aba7ff1f5203a45518cd8",
+     "ValidFrom": "2023-11-14T17:23:56Z",
+     "ValidTo": "2050-12-31T17:23:56Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Signal Messenger, LLC, CN=Signal Messenger, LLC",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 52236069294067056038100805893073402523117106810
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10006,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "org.example.sideloaded",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.example.sideloaded-X/base.apk",
+    "local_name": "",
+    "md5": "822c44e743d9d10250dd16a774af981e",
+    "sha1": "46c5f6f32ae5dfed2bf5ef40319e8801af92f68d",
+    "sha256": "8ea9f1a85d4c52bce11d7f50f92dcbddb57915a6583e01b483b70598c6f4339a",
+    "sha512": "f8e2577fbd2dfb4a823abad2d85cba9b6f07c6cc5361222ed284d71c7e585c50",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "87b793a2d71f501a5a2c41c0167e72a5",
+     "Sha1": "049edb6194367b83859c58d885322833e4cbec5b",
+     "Sha256": "82612292ddbe74fd5d778ed0e2c1f8b279f62e90ad048fa2131943ae40c48cc8",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=org.example.sideloaded",
+     "Subject": "CN=org.example.sideloaded",
+     "SignatureAlgorithm": "SHA384-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10007,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "org.telegram.messenger",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.telegram.messenger-X/base.apk",
+    "local_name": "",
+    "md5": "7762c0af737212a5417e905eb980e17b",
+    "sha1": "89d8b70c41412918f38506a4c21e03e1f26258bf",
+    "sha256": "901811a060038740c5909f808c6d114186bfa4cb5c9d57718e29b233694150ce",
+    "sha512": "d08126b9584a9b8e457cf7cc8c78039b52cab9c1f7dff5a0839585684ede3aeb",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "26babc62540ef0c20bfc6bacf3d3b1f5",
+     "Sha1": "9723e5838612e9c7c08ca2c6573b6026d7a51f8f",
+     "Sha256": "49c1522548ebacd46ce322b6fd47f6092bb745d0f88082145caf35e14dcc38e1",
+     "ValidFrom": "2013-08-29T19:13:13Z",
+     "ValidTo": "2038-08-23T19:13:13Z",
+     "Issuer": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "Subject": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "SignatureAlgorithm": "SHA1-RSA",
+     "SerialNumber": 1377803593
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/org.telegram.messenger-X/split_config.arm64_v8a.apk",
+    "local_name": "",
+    "md5": "7762c0af737212a5417e905eb980e17b",
+    "sha1": "89d8b70c41412918f38506a4c21e03e1f26258bf",
+    "sha256": "901811a060038740c5909f808c6d114186bfa4cb5c9d57718e29b233694150ce",
+    "sha512": "d08126b9584a9b8e457cf7cc8c78039b52cab9c1f7dff5a0839585684ede3aeb",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "26babc62540ef0c20bfc6bacf3d3b1f5",
+     "Sha1": "9723e5838612e9c7c08ca2c6573b6026d7a51f8f",
+     "Sha256": "49c1522548ebacd46ce322b6fd47f6092bb745d0f88082145caf35e14dcc38e1",
+     "ValidFrom": "2013-08-29T19:13:13Z",
+     "ValidTo": "2038-08-23T19:13:13Z",
+     "Issuer": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "Subject": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "SignatureAlgorithm": "SHA1-RSA",
+     "SerialNumber": 1377803593
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/org.telegram.messenger-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "7762c0af737212a5417e905eb980e17b",
+    "sha1": "89d8b70c41412918f38506a4c21e03e1f26258bf",
+    "sha256": "901811a060038740c5909f808c6d114186bfa4cb5c9d57718e29b233694150ce",
+    "sha512": "d08126b9584a9b8e457cf7cc8c78039b52cab9c1f7dff5a0839585684ede3aeb",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "26babc62540ef0c20bfc6bacf3d3b1f5",
+     "Sha1": "9723e5838612e9c7c08ca2c6573b6026d7a51f8f",
+     "Sha256": "49c1522548ebacd46ce322b6fd47f6092bb745d0f88082145caf35e14dcc38e1",
+     "ValidFrom": "2013-08-29T19:13:13Z",
+     "ValidTo": "2038-08-23T19:13:13Z",
+     "Issuer": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "Subject": "L=Saint-Petersburg, O=VK, OU=VK, CN=Nikolay Kudashov",
+     "SignatureAlgorithm": "SHA1-RSA",
+     "SerialNumber": 1377803593
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10008,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "org.example.watch.companion",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.example.watch.companion-X/base.apk",
+    "local_name": "",
+    "md5": "b4b8f06b97a69f42a00ee232a8feb32f",
+    "sha1": "76cbc23bc8c32827aa291f6f8df510443038024b",
+    "sha256": "87e1a0d249ad45fe239775c960cc49b453b79d8b263ce970ec9f1b4cecf434aa",
+    "sha512": "597c7119fee28c33a2776218d25b32965e6e715ecf04716096e6f78b42ca1e92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee7120743645b6478deede8c04f7ddd7",
+     "Sha1": "46de9f28993e85c2c641a358f87c12ccf079a4c2",
+     "Sha256": "86830bea3d569743b612752f783c5123c82f4f42df266d582af019a15560367a",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=Example Watch Co",
+     "Subject": "CN=Example Watch Co",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.example.watch.companion-X/split_config.arm64_v8a.apk",
+    "local_name": "",
+    "md5": "5d5f7a22897fbf0a51f23981a972d866",
+    "sha1": "dfc2a4eb4459a74c1a1876f9da87f31c1d6925dc",
+    "sha256": "99950d019c8dfc4430f5f40edc4f7e0a9daabe6184176b6bd8d660869237c4e0",
+    "sha512": "597c7119fee28c33a2776218d25b32965e6e715ecf04716096e6f78b42ca1e92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee7120743645b6478deede8c04f7ddd7",
+     "Sha1": "46de9f28993e85c2c641a358f87c12ccf079a4c2",
+     "Sha256": "86830bea3d569743b612752f783c5123c82f4f42df266d582af019a15560367a",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=Example Watch Co",
+     "Subject": "CN=Example Watch Co",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.example.watch.companion-X/split_config.en.apk",
+    "local_name": "",
+    "md5": "b45bce37df44d83a437318186ec2bd2d",
+    "sha1": "4e2a8020abae7ebdb1e69e03e303c8813f30a779",
+    "sha256": "ae12af45cc9310a71b539f267ed8a2cdf8455e2dbbf24e2276921efc783d8672",
+    "sha512": "597c7119fee28c33a2776218d25b32965e6e715ecf04716096e6f78b42ca1e92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee7120743645b6478deede8c04f7ddd7",
+     "Sha1": "46de9f28993e85c2c641a358f87c12ccf079a4c2",
+     "Sha256": "86830bea3d569743b612752f783c5123c82f4f42df266d582af019a15560367a",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=Example Watch Co",
+     "Subject": "CN=Example Watch Co",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.example.watch.companion-X/split_config.es.apk",
+    "local_name": "",
+    "md5": "7053b24617c9c14b32e77d157ea6ae51",
+    "sha1": "5be6313590fec769c193b1b3bfd7b229ce27a906",
+    "sha256": "4272397d614786e05db817fdd225bc83b58656893e520551bf811ce6a6293896",
+    "sha512": "597c7119fee28c33a2776218d25b32965e6e715ecf04716096e6f78b42ca1e92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee7120743645b6478deede8c04f7ddd7",
+     "Sha1": "46de9f28993e85c2c641a358f87c12ccf079a4c2",
+     "Sha256": "86830bea3d569743b612752f783c5123c82f4f42df266d582af019a15560367a",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=Example Watch Co",
+     "Subject": "CN=Example Watch Co",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/org.example.watch.companion-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "88ff714d4cc73af4e7d9bbdf5bf1bd95",
+    "sha1": "df4e1ecae5d0b7aa01c61f534e9ea54393772c2c",
+    "sha256": "716b9486cec8c0b509a391edeaaa576f275a379092012f7708cce13861dfe6f4",
+    "sha512": "597c7119fee28c33a2776218d25b32965e6e715ecf04716096e6f78b42ca1e92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "ee7120743645b6478deede8c04f7ddd7",
+     "Sha1": "46de9f28993e85c2c641a358f87c12ccf079a4c2",
+     "Sha256": "86830bea3d569743b612752f783c5123c82f4f42df266d582af019a15560367a",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=Example Watch Co",
+     "Subject": "CN=Example Watch Co",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10009,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "com.android.systemui",
+  "files": [
+   {
+    "path": "/system_ext/priv-app/SystemUIGoogle/SystemUIGoogle.apk",
+    "local_name": "",
+    "md5": "1f7a0038f90748ec2a05773e55686310",
+    "sha1": "5b4438c99ac06682c7de2464a9b0fe432285d98e",
+    "sha256": "700bfe194df6d557089c916e4131d6a5a403825b9a171bba150515298aafe132",
+    "sha512": "8ebed7abbb83685c440564571dfbe25d7b0c75bb7a207ef776df12f0b7701885",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "d2d9d47fb73a332d8bba56ee4760593e",
+     "Sha1": "33a69ac69f852762f2c09c87195729a8e34484e7",
+     "Sha256": "9be52060e32ed2a5ebcddd1709b5638f2a04bb58d2c48d2a7c58a69f724cbdb8",
+     "ValidFrom": "2023-03-08T18:44:24Z",
+     "ValidTo": "2053-03-08T18:44:24Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 419410671155700083114234876484398436078545865148
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10010,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "org.fdroid.fdroid",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.fdroid.fdroid-X/base.apk",
+    "local_name": "",
+    "md5": "3e2ce8d0fbf8ebe46b475b6e1ae5f806",
+    "sha1": "f4ff40c0779fd573dff26ee8722bff56011fda6a",
+    "sha256": "fa024819f0f93c62484b12f581b4a9dd6568a1bf1da1a7b04ecb2be35c9ef6b7",
+    "sha512": "3487225c9babfdf5d1a0476572a87e77b0b57f6cb603fb13b9a7e7d1bf6de9d2",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "17c55c628056e193e95644e989792786",
+     "Sha1": "05f2e65928088981b317fc9a6dbfe04b0fa13b4e",
+     "Sha256": "43238d512c1e5eb2d6569f4a3afbf5523418b82e0a3ed1552770abb9a9c9ccab",
+     "ValidFrom": "2010-07-23T17:10:24Z",
+     "ValidTo": "2037-12-08T17:10:24Z",
+     "Issuer": "C=UK, ST=Unknown, L=Wetherby, O=Unknown, OU=Unknown, CN=Ciaran Gultnieks",
+     "Subject": "C=UK, ST=Unknown, L=Wetherby, O=Unknown, OU=Unknown, CN=Ciaran Gultnieks",
+     "SignatureAlgorithm": "SHA1-RSA",
+     "SerialNumber": 1279905024
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.google.android.packageinstaller",
+  "uid": 10011,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "com.android.privatespace",
+  "files": [],
+  "installer": "null",
+  "uid": 10012,
+  "disabled": false,
+  "system": false,
+  "third_party": false
+ },
+ {
+  "name": "com.google.android.gms",
+  "files": [
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/base.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_AdsDynamite_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_CronetDynamite_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_DynamiteLoader_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_DynamiteModulesA_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_DynamiteModulesC_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_GoogleCertificates_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_MapsDynamite_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_MeasurementDynamite_installtime.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_config.en.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_config.es.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.gms-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "357800bbf57522257221de744f76bb1a",
+    "sha1": "0053b517ca5cef4608578fc98e1dcf060f2249a4",
+    "sha256": "49d596d19580d2f9bacea30e7c4f9d51e8f26c69aeb2d87a1e1e2ac3c6e69f34",
+    "sha512": "54b8e754eae9b757f80b2fc98fc43235d1eca8722568c8f2fd6b3b9d9a8067b3",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "b04028b50c5170f54fcdaa4fa4e28c99",
+     "Sha1": "2169eddb5fbb1fdf241c262681024692c4fc1ecb",
+     "Sha256": "5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402",
+     "ValidFrom": "2024-02-23T20:17:19Z",
+     "ValidTo": "2054-02-23T20:17:19Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 728663519363111669948949770085830750711775721945
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10013,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "com.android.chrome",
+  "files": [
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/base.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_chrome.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_config.en.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_config.es.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_dev_ui.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_on_demand.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   },
+   {
+    "path": "/data/app/~~X/com.android.chrome-X/split_stack_unwinder.apk",
+    "local_name": "",
+    "md5": "6a2e71a785585439b10a2a32df6f22f8",
+    "sha1": "5bdc02825fe8cf52a60e8096fdacc50cb373f6da",
+    "sha256": "a5b364533845d90620df8c002fef34133ff834557dd625511b0dfe51132e5666",
+    "sha512": "9d49ad038f35a6feaa24c07666f4be1ea5022b4b82e2e095183cf4dcbf1b5f9e",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "cde9f6208d672b54b1dacc0b7029f5eb",
+     "Sha1": "38918a453d07199354f8b19af05ec6562ced5788",
+     "Sha256": "f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83",
+     "ValidFrom": "2008-08-21T23:13:34Z",
+     "ValidTo": "2036-01-07T23:13:34Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "MD5-RSA",
+     "SerialNumber": 14042372374541250701
+    },
+    "certificate_error": "",
+    "trusted_certificate": true
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10014,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ },
+ {
+  "name": "org.schabi.newpipe",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.schabi.newpipe-X/base.apk",
+    "local_name": "",
+    "md5": "89e26a751d60f84bba31dc05eb918fda",
+    "sha1": "eeda8516fe1a40df3543a423d0f0fbf73296fa09",
+    "sha256": "8fdb6d8898d1e760e0e5814911de44e69b02aa1e9b6f0ca3824477e25d371ce6",
+    "sha512": "4c024086822747a2e165a29830d63a9bf5202243c103528866f231c8cdcdd97c",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "7cc4415d125f57b3854fbaa3ed6b4d30",
+     "Sha1": "b02e907c1cd6fc57c335f088d08f505f94e4d215",
+     "Sha256": "cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab",
+     "ValidFrom": "2017-04-13T20:57:47Z",
+     "ValidTo": "2042-04-07T20:57:47Z",
+     "Issuer": "C=DE, CN=Christian Schabesberger",
+     "Subject": "C=DE, CN=Christian Schabesberger",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 747702084
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "org.fdroid.fdroid",
+  "uid": 10015,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "org.example.devtool.debug",
+  "files": [
+   {
+    "path": "/data/app/~~X/org.example.devtool.debug-X/base.apk",
+    "local_name": "",
+    "md5": "2bc8b6d332316698937aa3cc3c7dce5d",
+    "sha1": "5a47ebb4887d49f8b77468da51688c247a9bb37d",
+    "sha256": "f62f89d271c075613e1f244a5bf9542c67c7779852bf08a96f6715b2a55edb22",
+    "sha512": "119552077c1cc64c15fa5ba6b23df7d81ee17c2f2aef1db986d7f44299767b92",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "49c5fd34a28a06300f67079e47699906",
+     "Sha1": "e03ab2f6ab90730367820a39b2b8f39fa089df11",
+     "Sha256": "ce7954d53adddef0fbd31412865d0f26e1a189a3e195a1c9e8de4fc8ee00b16d",
+     "ValidFrom": "2026-01-01T00:00:00Z",
+     "ValidTo": "2051-01-01T00:00:00Z",
+     "Issuer": "CN=org.example.devtool.debug",
+     "Subject": "CN=org.example.devtool.debug",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 1
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "null",
+  "uid": 10016,
+  "disabled": false,
+  "system": false,
+  "third_party": true
+ },
+ {
+  "name": "com.google.android.apps.dreamliner",
+  "files": [
+   {
+    "path": "/data/app/~~X/com.google.android.apps.dreamliner-X/base.apk",
+    "local_name": "",
+    "md5": "2d78fc281977e1c827c84895d128640d",
+    "sha1": "8fd6c88283cddef979696d7d46e77a6c596188fa",
+    "sha256": "c7c43d748cc5c5c21a74e5be2bd52645074c6f61afde7dfb37ef57d29b32a631",
+    "sha512": "e63d5dcc0920c6d9057825412e4fe087a7a1f0f54d35f6b379458aaebc01f561",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "0cdbea12715b8ca8754c913e1d5bbf26",
+     "Sha1": "a61fbbc03efadf7632622c48d4b3016e5c84807b",
+     "Sha256": "a95d21231695a11d2f85610c87fd5b7325084019eb8bda30e42d42b993f4d303",
+     "ValidFrom": "2018-04-18T19:42:47Z",
+     "ValidTo": "2048-04-18T19:42:47Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 352709881600156492482767965112449078915866485177
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.apps.dreamliner-X/split_config.arm64_v8a.apk",
+    "local_name": "",
+    "md5": "2d78fc281977e1c827c84895d128640d",
+    "sha1": "8fd6c88283cddef979696d7d46e77a6c596188fa",
+    "sha256": "c7c43d748cc5c5c21a74e5be2bd52645074c6f61afde7dfb37ef57d29b32a631",
+    "sha512": "e63d5dcc0920c6d9057825412e4fe087a7a1f0f54d35f6b379458aaebc01f561",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "0cdbea12715b8ca8754c913e1d5bbf26",
+     "Sha1": "a61fbbc03efadf7632622c48d4b3016e5c84807b",
+     "Sha256": "a95d21231695a11d2f85610c87fd5b7325084019eb8bda30e42d42b993f4d303",
+     "ValidFrom": "2018-04-18T19:42:47Z",
+     "ValidTo": "2048-04-18T19:42:47Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 352709881600156492482767965112449078915866485177
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.apps.dreamliner-X/split_config.en.apk",
+    "local_name": "",
+    "md5": "2d78fc281977e1c827c84895d128640d",
+    "sha1": "8fd6c88283cddef979696d7d46e77a6c596188fa",
+    "sha256": "c7c43d748cc5c5c21a74e5be2bd52645074c6f61afde7dfb37ef57d29b32a631",
+    "sha512": "e63d5dcc0920c6d9057825412e4fe087a7a1f0f54d35f6b379458aaebc01f561",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "0cdbea12715b8ca8754c913e1d5bbf26",
+     "Sha1": "a61fbbc03efadf7632622c48d4b3016e5c84807b",
+     "Sha256": "a95d21231695a11d2f85610c87fd5b7325084019eb8bda30e42d42b993f4d303",
+     "ValidFrom": "2018-04-18T19:42:47Z",
+     "ValidTo": "2048-04-18T19:42:47Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 352709881600156492482767965112449078915866485177
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.apps.dreamliner-X/split_config.es.apk",
+    "local_name": "",
+    "md5": "2d78fc281977e1c827c84895d128640d",
+    "sha1": "8fd6c88283cddef979696d7d46e77a6c596188fa",
+    "sha256": "c7c43d748cc5c5c21a74e5be2bd52645074c6f61afde7dfb37ef57d29b32a631",
+    "sha512": "e63d5dcc0920c6d9057825412e4fe087a7a1f0f54d35f6b379458aaebc01f561",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "0cdbea12715b8ca8754c913e1d5bbf26",
+     "Sha1": "a61fbbc03efadf7632622c48d4b3016e5c84807b",
+     "Sha256": "a95d21231695a11d2f85610c87fd5b7325084019eb8bda30e42d42b993f4d303",
+     "ValidFrom": "2018-04-18T19:42:47Z",
+     "ValidTo": "2048-04-18T19:42:47Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 352709881600156492482767965112449078915866485177
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   },
+   {
+    "path": "/data/app/~~X/com.google.android.apps.dreamliner-X/split_config.xxhdpi.apk",
+    "local_name": "",
+    "md5": "2d78fc281977e1c827c84895d128640d",
+    "sha1": "8fd6c88283cddef979696d7d46e77a6c596188fa",
+    "sha256": "c7c43d748cc5c5c21a74e5be2bd52645074c6f61afde7dfb37ef57d29b32a631",
+    "sha512": "e63d5dcc0920c6d9057825412e4fe087a7a1f0f54d35f6b379458aaebc01f561",
+    "error": "",
+    "verified_certificate": true,
+    "certificate": {
+     "Md5": "0cdbea12715b8ca8754c913e1d5bbf26",
+     "Sha1": "a61fbbc03efadf7632622c48d4b3016e5c84807b",
+     "Sha256": "a95d21231695a11d2f85610c87fd5b7325084019eb8bda30e42d42b993f4d303",
+     "ValidFrom": "2018-04-18T19:42:47Z",
+     "ValidTo": "2048-04-18T19:42:47Z",
+     "Issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "Subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+     "SignatureAlgorithm": "SHA256-RSA",
+     "SerialNumber": 352709881600156492482767965112449078915866485177
+    },
+    "certificate_error": "",
+    "trusted_certificate": false
+   }
+  ],
+  "installer": "com.android.vending",
+  "uid": 10017,
+  "disabled": false,
+  "system": true,
+  "third_party": false
+ }
+]

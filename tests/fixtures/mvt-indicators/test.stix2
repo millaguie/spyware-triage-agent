@@ -1,0 +1,9 @@
+{"type": "bundle", "id": "bundle--test", "objects": [
+ {"type": "malware", "id": "malware--1", "name": "TestSpy", "is_family": true},
+ {"type": "indicator", "id": "indicator--1", "pattern_type": "stix",
+  "pattern": "[domain-name:value = 'evil-c2.example.xyz']"},
+ {"type": "indicator", "id": "indicator--2", "pattern_type": "stix",
+  "pattern": "[domain-name:value = 'tracker-spy.top']"},
+ {"type": "relationship", "id": "relationship--1", "relationship_type": "indicates",
+  "source_ref": "indicator--1", "target_ref": "malware--1"}
+]}

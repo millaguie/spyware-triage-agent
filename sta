@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Run the sta CLI, with the project's .venv (local) or in a container (docker).
+# STA_RUNTIME=local|docker chooses. Default: local if .venv exists, else docker.
+DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+runtime="${STA_RUNTIME:-}"
+if [[ -z "$runtime" ]]; then
+  if [[ -x "$DIR/.venv/bin/python" ]]; then runtime=local; else runtime=docker; fi
+fi
+
+if [[ "$runtime" == local ]]; then
+  if [[ ! -x "$DIR/.venv/bin/python" ]]; then
+    echo "ERROR: $DIR/.venv is missing. Run ./install.sh first, or use STA_RUNTIME=docker." >&2
+    exit 2
+  fi
+  exec "$DIR/.venv/bin/python" -m sta "$@"
+fi
+
+if ! command -v docker >/dev/null; then
+  echo "ERROR: docker is not installed. Install it, or run ./install.sh for a local setup." >&2
+  exit 2
+fi
+export STA_DIR="$DIR"
+compose=(docker compose -f "$DIR/compose.yaml")
+mkdir -p "$DIR/cases" "$DIR/kb/cache"
+
+if [[ -z "$("${compose[@]}" ps -q --status running sta 2>/dev/null)" ]]; then
+  # A host daemon holds the USB device, and the container cannot reach the phone.
+  if pgrep -x adb >/dev/null; then
+    echo "WARNING: an adb server runs on this computer. Stop it first: adb kill-server" >&2
+  fi
+  if pgrep -x usbmuxd >/dev/null; then
+    echo "WARNING: usbmuxd runs on this computer. Stop it first: sudo systemctl stop usbmuxd" >&2
+  fi
+  # The first start builds the image (several minutes). Keep that output out of the agent.
+  if ! out="$("${compose[@]}" up -d --wait 2>&1)"; then
+    echo "$out" | tail -20 >&2
+    echo "ERROR: the sta container did not start." >&2
+    exit 2
+  fi
+fi
+
+tty=(-T)
+[[ -t 0 && -t 1 ]] && tty=()
+# Pass the VirusTotal settings and the pinned case through only when set (`-e NAME` copies the value).
+vt=()
+for name in MVT_VT_API_KEY VT_API_KEY STA_VT_DELAY STA_VT_ALL STA_ABUSECH_API_KEY STA_CASE; do
+  [[ -n "${!name:-}" ]] && vt+=(-e "$name")
+done
+exec "${compose[@]}" exec "${tty[@]}" -e HOST_UID="$(id -u)" -e HOST_GID="$(id -g)" "${vt[@]}" \
+  sta /usr/local/lib/sta/exec.sh "$@"

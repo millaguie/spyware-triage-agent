@@ -1,0 +1,5 @@
+- name: KidWatch
+  type: watchware
+  packages:
+  - com.kidwatch.parent
+  certificates: []

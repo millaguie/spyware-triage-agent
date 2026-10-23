@@ -1,0 +1,36 @@
+# Run sta in a container. Linux only: Docker on macOS cannot pass USB devices.
+# Use it through ./sta (STA_RUNTIME=docker), not directly.
+services:
+  sta:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: sta:latest
+    # Reap the daemons' children (adb forks), so no zombies pile up.
+    init: true
+    # Host network: usbmuxd needs the host's udev events to see an iPhone plugged in.
+    network_mode: host
+    # 189 = USB devices. With the bind mount below, a phone plugged in after
+    # the container started (a new node) works too. `devices:` would copy only
+    # the nodes that exist at start.
+    device_cgroup_rules:
+      - "c 189:* rmw"
+    environment:
+      STA_DIR: ${STA_DIR:?run through ./sta}
+      # Keep away from an adb server on the host, which uses port 5037.
+      ANDROID_ADB_SERVER_PORT: "5038"
+    # Same path as on the host, so paths in the output work for the agent too.
+    working_dir: ${STA_DIR}
+    volumes:
+      - ${STA_DIR}:${STA_DIR}
+      - /dev/bus/usb:/dev/bus/usb
+      - /run/udev:/run/udev:ro
+      # Local time, so case names and report dates match the host.
+      - /etc/localtime:/etc/localtime:ro
+      # adb key, pymobiledevice3 pairing, MVT indicators.
+      - home:/root
+      # usbmuxd pairing records.
+      - lockdown:/var/lib/lockdown
+volumes:
+  home:
+  lockdown:

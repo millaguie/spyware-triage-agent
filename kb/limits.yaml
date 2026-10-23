@@ -1,0 +1,28 @@
+# Printed in every report. Keep each line short and true.
+limits:
+  - A result without findings does not prove the phone is clean. Indicators only cover spyware that researchers have already found and published.
+  - Advanced spyware can delete its traces. A phone that was infected months ago and restarted may show nothing.
+  - Android checks see the installed apps, settings and logs, not the private data of each app.
+  - The deep iPhone checks use a backup. A backup does not include everything that is on the phone. A PARTIAL report (quick iPhone check, no backup) sees only the app list, profiles, signing profiles and crash logs.
+  - The check counts the accounts signed in on the phone but never copies their names or contents. Someone can read your mail, cloud photos or chats from another device without touching the phone.
+  - Store lookups only say that an app exists in a store. The signature check is what tells a fake copy apart, and it only exists for the apps in kb/known-signers.yaml and F-Droid.
+
+next_steps:
+  red:
+    - Do not reset, update or restore the phone. That destroys evidence.
+    - Keep the case folder safe. Do not send it over email or normal chat.
+    - Contact a specialist (Amnesty Tech Security Lab, Access Now Helpline help@accessnow.org, Citizen Lab). For stalkerware, contact a support service first (stopstalkerware.org).
+    - If the finding is stalkerware, do not remove it or confront anyone before a safety plan.
+    - Until the review ends, use another device for sensitive conversations.
+    - Do the account checks listed under 'clean'.
+  amber:
+    - Go through each amber finding with the owner and act on the answers.
+    - Remove apps that nobody recognises. Reinstall the important ones from the official store.
+    - Install all pending system updates.
+    - Do the account checks listed under 'clean'.
+  clean:
+    - Install all pending system updates and keep them on.
+    - "Check linked devices: WhatsApp (Settings > Linked devices), Signal (Settings > Linked devices), Telegram (Settings > Devices)."
+    - "Check account sessions: Google (myaccount.google.com > Security > Your devices), Apple ID (Settings > your name > Devices)."
+    - Turn on two-step verification for mail and messaging apps.
+    - "High-risk owners: on iPhone turn on Lockdown Mode; on Android turn on Advanced Protection."

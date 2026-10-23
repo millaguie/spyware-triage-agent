@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sta"
+version = "0.1.0"
+description = "Guided phone check for spyware, stalkerware and fake apps, on top of MVT"
+requires-python = ">=3.11"
+# Exact versions live in requirements.txt (install.sh and the Dockerfile use it).
+dependencies = ["pyyaml", "apkid", "pyaxmlparser"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "pyright"]
+
+[project.scripts]
+sta = "sta.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E741", "E501", "B904"]
+
+[tool.pyright]
+include = ["src", "tests"]
+extraPaths = ["src"]
+pythonVersion = "3.11"

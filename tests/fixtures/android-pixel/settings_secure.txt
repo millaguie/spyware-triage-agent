@@ -1,0 +1,2 @@
+default_input_method=com.google.android.inputmethod.latin/com.android.inputmethod.latin.LatinIME
+enabled_notification_listeners=com.google.android.apps.dreamliner/com.google.android.apps.dreamliner.notification.DreamlinerNotificationService:com.google.android.gms/com.google.android.gms.auth.proximity.phonehub.PhoneHubNotificationListenerService:org.example.watch.companion/com.google.android.libraries.wear.companion.notification.service.CompanionNotificationListenerService

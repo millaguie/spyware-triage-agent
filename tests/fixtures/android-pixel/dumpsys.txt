@@ -1,0 +1,160 @@
+-------------------------------------------------------------------------------
+DUMP OF SERVICE device_policy:
+Current Device Policy Manager state:
+  Immutable state:
+    mHasFeature=true
+    mIsWatch=false
+    mIsAutomotive=false
+    mHasTelephonyFeature=true
+    mSafetyChecker=null
+  
+  
+  
+  Enabled Device Admins (User 0, provisioningState: 0):
+  
+    mPasswordOwner=-1
+-------------------------------------------------------------------------------
+DUMP OF SERVICE device_state:
+--------- 0.002s was the duration of dumpsys device_state, ending at: 2026-01-10 12:03:14
+-------------------------------------------------------------------------------
+DUMP OF SERVICE account:
+User UserInfo{0:Owner:4c13}:
+  Accounts: 3
+    Account {name=a@example.com, type=com.google}
+    Account {name=b@example.com, type=com.google}
+    Account {name=WhatsApp, type=com.whatsapp}
+  
+  Active Sessions: 0
+--------- 0.014s was the duration of dumpsys account, ending at: 2026-01-10 12:02:54
+-------------------------------------------------------------------------------
+DUMP OF SERVICE deviceidle:
+  Flags:
+    com.android.server.deviceidle.remove_idle_location=true
+
+  Settings:
+    inactive_to=+15s0ms
+
+  Whitelist (except idle) system apps:
+    com.google.android.gms
+    com.android.shell
+  Whitelist system apps:
+    com.google.android.gms
+  Whitelist user apps:
+    org.example.sideloaded
+    org.fdroid.fdroid
+--------- 0.072s was the duration of dumpsys deviceidle, ending at: 2026-01-10 12:03:14
+-------------------------------------------------------------------------------
+DUMP OF SERVICE package:
+Activity Resolver Table:
+  Full MIME Types:
+      text/plain:
+        a1b2c3d org.example.hidden/.ViewActivity
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        6e3541e org.fdroid.fdroid/.ui.MainActivityAlias
+        6e3541f org.example.hidden/.MainActivity
+
+Packages:
+  Package [org.example.hidden] (a1b2c3d):
+    appId=10901
+    pccId=-1
+    pkg=Package{179676c org.example.hidden}
+    codePath=/data/app/~~X/org.example.hidden-X==
+    resourcePath=/data/app/~~X/org.example.hidden-X==
+    legacyNativeLibraryDir=/data/app/~~X/org.example.hidden-X==/lib
+    extractNativeLibs=false
+    primaryCpuAbi=arm64-v8a
+    secondaryCpuAbi=null
+    cpuAbiOverride=null
+    versionCode=7 minSdk=21 targetSdk=22
+    minExtensionVersions=[]
+    versionName=1.0.7
+    hiddenApiEnforcementPolicy=2
+    usesNonSdkApi=false
+    splits=[base]
+    apkSigningVersion=2
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE ALLOW_AUDIO_PLAYBACK_CAPTURE ]
+    forceQueryable=false
+    pageSizeCompat=0
+    queriesIntents=[]
+    scannedAsStoppedSystemApp=false
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2026-10-10 11:00:00
+    lastUpdateTime=2026-10-10 11:00:05
+    installerPackageName=null
+    installerPackageUid=-1
+    initiatingPackageName=null
+    originatingPackageName=null
+    packageSource=3
+    appMetadataFilePath=null
+    appMetadataSource=0
+    signatures=PackageSignatures{7bc2135 version:2, signatures:[01234567], past signatures:[]}
+    installPermissionsFixed=true
+    pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]
+    privatePkgFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_UNRESIZEABLE ALLOW_AUDIO_PLAYBACK_CAPTURE ]
+    apexModuleName=null
+    declared permissions:
+      org.example.hidden.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: prot=signature
+    install permissions:
+      android.permission.INTERNET: granted=true
+      android.permission.RECEIVE_BOOT_COMPLETED: granted=true
+      android.permission.RECEIVE_SMS: granted=true
+      android.permission.READ_SMS: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+    User 0: ceDataInode=442 deDataInode=511 pccCeDataInode=0 pccDeDataInode=0 installed=true hidden=false suspended=false appLockEnabled=false distractionFlags=0 stopped=false notLaunched=false enabled=0 instant=false virtual=false quarantined=false
+      installReason=4
+      dataDir=/data/user/0/org.example.hidden
+      firstInstallTime=2026-10-10 11:00:00
+      uninstallReason=0
+      lastDisabledCaller: shell
+      gids=[3003]
+      runtime permissions:
+        android.permission.POST_NOTIFICATIONS: granted=true, flags=[ USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.RECORD_AUDIO: granted=true, flags=[ GRANTED_BY_DEFAULT|USER_SENSITIVE_WHEN_GRANTED]
+        android.permission.ACCESS_COARSE_LOCATION: granted=true, flags=[ GRANTED_BY_DEFAULT|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+      disabledComponents:
+        org.example.hidden.MainActivity
+--------- 0.183s was the duration of dumpsys package, ending at: 2026-01-10 12:03:30
+-------------------------------------------------------------------------------
+DUMP OF SERVICE role:
+ROLE STATE (dumpsys role):
+{
+  user_states={
+    user_id=0
+    version=1
+    packages_hash=0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+    roles=[
+      {
+        name=android.app.role.SMS
+        fallback_enabled=true
+        holders=org.example.sideloaded
+      }
+      {
+        name=android.app.role.DIALER
+        fallback_enabled=true
+        holders=com.google.android.dialer
+      }
+      {
+        name=android.app.role.CALL_REDIRECTION
+        fallback_enabled=true
+      }
+      {
+        name=android.app.role.DEVICE_POLICY_MANAGEMENT
+        fallback_enabled=true
+      }
+    ]
+  }
+}
+--------- 0.007s was the duration of dumpsys role, ending at: 2026-01-10 12:03:41
+-------------------------------------------------------------------------------
+DUMP OF SERVICE user:
+Current user: 0
+
+Users:
+  UserInfo{0:Owner:4c13} serialNo=0 isPrimary=true
+    Type: android.os.usertype.full.SYSTEM
+    Flags: 19475 (ADMIN|FULL|INITIALIZED|MAIN|PRIMARY|SYSTEM)
+    State: RUNNING_UNLOCKED
+    Created: <unknown>
+--------- 0.013s was the duration of dumpsys user, ending at: 2026-01-10 12:03:43

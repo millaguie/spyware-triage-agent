@@ -1,0 +1,33 @@
+# Popular apps that fake and modified copies imitate.
+# An installed package whose name is almost the same as one of these, and
+# that did not come from Google Play, is reported as "impersonation".
+# Add the banking and local apps of your region here.
+
+- {package: com.whatsapp, name: WhatsApp}
+- {package: com.whatsapp.w4b, name: WhatsApp Business}
+- {package: org.telegram.messenger, name: Telegram}
+- {package: org.thoughtcrime.securesms, name: Signal}
+- {package: com.facebook.katana, name: Facebook}
+- {package: com.facebook.orca, name: Messenger}
+- {package: com.instagram.android, name: Instagram}
+- {package: com.snapchat.android, name: Snapchat}
+- {package: com.zhiliaoapp.musically, name: TikTok}
+- {package: com.twitter.android, name: X (Twitter)}
+- {package: com.viber.voip, name: Viber}
+- {package: jp.naver.line.android, name: LINE}
+- {package: com.tencent.mm, name: WeChat}
+- {package: com.discord, name: Discord}
+- {package: com.google.android.gm, name: Gmail}
+- {package: com.microsoft.office.outlook, name: Outlook}
+- {package: ch.protonmail.android, name: Proton Mail}
+- {package: com.android.chrome, name: Chrome}
+- {package: org.mozilla.firefox, name: Firefox}
+- {package: com.brave.browser, name: Brave}
+- {package: com.google.android.youtube, name: YouTube}
+- {package: com.google.android.apps.maps, name: Google Maps}
+- {package: com.android.vending, name: Google Play Store}
+- {package: com.google.android.gms, name: Google Play services}
+- {package: com.google.android.apps.authenticator2, name: Google Authenticator}
+- {package: us.zoom.videomeetings, name: Zoom}
+- {package: com.microsoft.teams, name: Microsoft Teams}
+- {package: com.paypal.android.p2pmobile, name: PayPal}

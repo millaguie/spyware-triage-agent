@@ -1,0 +1,64 @@
+{
+  "com.example.notes": {
+    "CFBundleIdentifier": "com.example.notes",
+    "CFBundleName": "Example Notes",
+    "CFBundleVersion": "4.2",
+    "ApplicationType": "User",
+    "SignerIdentity": "Apple iPhone OS Application Signing",
+    "Path": "/private/var/containers/Bundle/Application/AA11/ExampleNotes.app",
+    "ProfileValidated": true,
+    "SequenceNumber": 12,
+    "ApplicationDSID": 999000111,
+    "Entitlements": {
+      "application-identifier": "ABCDE12345.com.example.notes",
+      "com.apple.developer.team-identifier": "ABCDE12345"
+    }
+  },
+  "com.fakespy.monitor": {
+    "CFBundleIdentifier": "com.fakespy.monitor",
+    "CFBundleName": "Family Locator",
+    "CFBundleVersion": "3.1",
+    "ApplicationType": "User",
+    "SignerIdentity": "Apple iPhone OS Application Signing",
+    "Path": "/private/var/containers/Bundle/Application/DD44/FamilyLocator.app",
+    "Entitlements": {
+      "application-identifier": "ABCDE12345.com.fakespy.monitor"
+    }
+  },
+  "com.example.securenotes": {
+    "CFBundleIdentifier": "com.example.securenotes",
+    "CFBundleName": "Secure Notes",
+    "CFBundleVersion": "1.0",
+    "ApplicationType": "User",
+    "SignerIdentity": "iPhone Distribution: Example Corporation (MM0EXAMPLE)",
+    "Path": "/private/var/containers/Bundle/Application/BB22/SecureNotes.app",
+    "ProfileValidated": true,
+    "Entitlements": {
+      "application-identifier": "MM0EXAMPLE.com.example.securenotes",
+      "com.apple.developer.team-identifier": "MM0EXAMPLE",
+      "com.apple.developer.networking.vpn.api": ["allow-vpn"]
+    }
+  },
+  "com.example.spyware.helper": {
+    "CFBundleIdentifier": "com.example.spyware.helper",
+    "CFBundleName": "Sync Helper",
+    "CFBundleVersion": "0.9",
+    "ApplicationType": "Hidden",
+    "SignerIdentity": "iPhone Distribution: Example Corporation (MM0EXAMPLE)",
+    "Path": "/private/var/containers/Bundle/Application/CC33/SyncHelper.app",
+    "Entitlements": {
+      "application-identifier": "MM0EXAMPLE.com.example.spyware.helper"
+    }
+  },
+  "com.example.unexplained": {
+    "CFBundleIdentifier": "com.example.unexplained",
+    "CFBundleName": "Weather Now",
+    "CFBundleVersion": "2.0",
+    "ApplicationType": "User",
+    "SignerIdentity": "iPhone Distribution: Unknown Party (ZZ9UNKNOWN)",
+    "Path": "/private/var/containers/Bundle/Application/EE55/WeatherNow.app",
+    "Entitlements": {
+      "application-identifier": "ZZ9UNKNOWN.com.example.unexplained"
+    }
+  }
+}

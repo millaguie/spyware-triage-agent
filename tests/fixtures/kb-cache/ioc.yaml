@@ -1,0 +1,7 @@
+# Synthetic entries in the shape of AssoEchap/stalkerware-indicators ioc.yaml.
+- name: FakeSpy
+  type: stalkerware
+  packages:
+  - com.fakespy.monitor
+  certificates:
+  - "0000000000000000000000000000000000000001"

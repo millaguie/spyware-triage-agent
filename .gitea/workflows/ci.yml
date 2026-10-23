@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          pip install -e '.[dev]' --no-deps
+          pip install pytest ruff
+      - name: Lint
+        run: ruff check src tests
+      - name: Test
+        run: python -m pytest

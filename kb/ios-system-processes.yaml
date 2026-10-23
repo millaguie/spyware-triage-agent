@@ -1,0 +1,20 @@
+# iOS processes we know belong to the system: a crash report naming one of
+# them raises no ios-crash-unknown-process. Start short and grow it only with
+# names seen on a real sysdiagnose (task L5): iOS has hundreds of daemons and
+# a guessed list would hide a real spyware process. The seeded names come from
+# the two reports our crash rules cite (Amnesty's Pegasus forensics and
+# Kaspersky's Triangulation writeup), which show these processes crashing on
+# clean phones too. A process is matched against this list by exact name, and
+# also against the bundle ids of the apps listed by `apps list`.
+- SpringBoard
+- backboardd
+- mediaserverd
+- bluetoothd
+- imagent
+- MessagesBlastDoorService
+- IMTransferAgent
+- locationd
+- CommCenter
+- assistantd
+- com.apple.WebKit.Networking
+- com.apple.WebKit.WebContent

@@ -1,0 +1,7 @@
+# Pinned versions for the sta virtualenv (install.sh) and the Docker image.
+# Bump them here, in one place. mvt and pymobiledevice3 run under pipx on a
+# local install; the image pins them in requirements-image.txt.
+pyyaml==6.0.3
+apkid==3.1.0
+yara-python-dex==1.1.0
+pyaxmlparser==0.3.31

@@ -1,0 +1,1 @@
+{"mcpServers": {"sta": {"command": "python3", "args": ["src/sta/mcp_server.py"], "exposure": "direct"}}}

@@ -1,0 +1,95 @@
+[
+  {
+    "level": "MEDIUM",
+    "module": "aqf_packages",
+    "message": "Found a non-system package installed via adb or another method: \"org.example.devtool.debug\"",
+    "event_time": "",
+    "event": {"name": "org.example.devtool.debug", "installer": "null", "system": false},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "aqf_packages",
+    "message": "Found a non-system package installed via adb or another method: \"org.example.sideloaded\"",
+    "event_time": "",
+    "event": {"name": "org.example.sideloaded", "installer": "null", "system": false},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "aqf_packages",
+    "message": "Found a package installed via a browser (installer=\"com.google.android.packageinstaller\"): \"org.example.conference.wifisetup\"",
+    "event_time": "",
+    "event": {"name": "org.example.conference.wifisetup", "installer": "com.google.android.packageinstaller", "system": false},
+    "matched_indicator": null
+  },
+  {
+    "level": "INFORMATIONAL",
+    "module": "aqf_packages",
+    "message": "Found a package installed via a third party store (installer=\"org.fdroid.fdroid\"): \"org.schabi.newpipe\"",
+    "event_time": "",
+    "event": {"name": "org.schabi.newpipe", "installer": "org.fdroid.fdroid", "system": false},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "dumpsys_appops",
+    "message": "Package 'org.telegram.messenger' had risky permission 'REQUEST_INSTALL_PACKAGES' set to 'access' at 2026-01-05 10:00:00",
+    "event_time": "2026-01-05 10:00:00.826000",
+    "event": {"package_name": "org.telegram.messenger", "permission": "REQUEST_INSTALL_PACKAGES", "access": "access"},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "dumpsys_appops",
+    "message": "Package 'com.android.chrome' had risky permission 'REQUEST_INSTALL_PACKAGES' set to 'reject' at 2025-12-01 10:00:00",
+    "event_time": "2025-12-01 10:00:00.698000",
+    "event": {"package_name": "com.android.chrome", "permission": "REQUEST_INSTALL_PACKAGES", "access": "reject"},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "dumpsys_battery_daily",
+    "message": "Detected uninstall of package com.google.android.trichromelibrary_782700532 (vers 0)",
+    "event_time": "2026-01-03 02:00:00",
+    "event": {"package_name": "com.google.android.trichromelibrary_782700532", "vers": "0"},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "dumpsys_battery_daily",
+    "message": "Detected uninstall of package com.google.android.trichromelibrary_782700532 (vers 0)",
+    "event_time": "2026-01-02 02:00:00",
+    "event": {"package_name": "com.google.android.trichromelibrary_782700532", "vers": "0"},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "dumpsys_battery_daily",
+    "message": "Detected uninstall of package com.google.android.trichromelibrary_782700532 (vers 0)",
+    "event_time": "2026-01-01 02:00:00",
+    "event": {"package_name": "com.google.android.trichromelibrary_782700532", "vers": "0"},
+    "matched_indicator": null
+  },
+  {
+    "level": "MEDIUM",
+    "module": "tombstones",
+    "message": "Potentially suspicious crash in process 'android.hardwar' running as UID '1000' in tombstone",
+    "event_time": "",
+    "event": {
+      "process_name": "android.hardwar",
+      "abort_message": "[Watchdog] main_thread::resetLockout has timed out.",
+      "signal_info": {"code": -6, "code_name": "SI_TKILL", "name": "SIGABRT", "number": 6},
+      "build_fingerprint": "google/akita/akita:17/CP3A.260905.009/16091614:user/release-keys"
+    },
+    "matched_indicator": null
+  },
+  {
+    "level": "LOW",
+    "module": "dumpsys_adb_state",
+    "message": "Found a trusted ADB host key, but the AndroidQF acquisition does not include its host key: 00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF (operator@laptop)",
+    "event_time": "",
+    "event": {"user": "operator@laptop", "fingerprint": "00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF"},
+    "matched_indicator": null
+  }
+]

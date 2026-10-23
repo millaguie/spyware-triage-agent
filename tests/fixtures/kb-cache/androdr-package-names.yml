@@ -1,0 +1,8 @@
+version: "test"
+entries:
+  - indicator: "com.testrat.dropper"
+    family: "TestRAT"
+    category: "SPYWARE"
+    severity: "MEDIUM"
+    description: "synthetic"
+    source: "test"

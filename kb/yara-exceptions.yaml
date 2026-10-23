@@ -1,0 +1,13 @@
+# Echap YARA rules that also match common libraries. For a rule listed here,
+# a match counts only when at least one string in `require` matched too.
+# Other matches stay in apk-scan.json as `yara_discarded`, for an expert.
+#
+#   rule name:
+#     require: string identifiers from the rule, with the $
+#     why:     what else matches without them
+
+android_police:
+  require: ["$s1", "$s10"]
+  why: >
+    $s2 to $s9 come from WebRTC, the video-call library. Every app with video
+    calls has them (seen: Rocket.Chat and MyInvestor from Google Play, 2026-10-18).

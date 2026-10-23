@@ -1,0 +1,2 @@
+{"app_name":"WebKit.Networking","timestamp":"2026-10-15 08:31:12.00 +0200","os_version":"iPhone OS 26.1 (23B85)","bug_type":"309","incident_id":"AAAABBBB-1111-2222-3333-444455557777"}
+{"app_name":"WebKit.Networking","bug_type":"309","procName":"com.apple.WebKit.Networking","procPath":"/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app/PlugIns/NetworkingExtension.appex/Contents/MacOS/NetworkingExtension","pid":518,"exception":{"type":"EXC_BAD_ACCESS","signal":"SIGSEGV","subtype":"KERN_INVALID_ADDRESS"},"faultingThread":0}

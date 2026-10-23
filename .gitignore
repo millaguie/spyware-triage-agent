@@ -1,0 +1,9 @@
+/cases/
+/kb/cache/
+.sta/
+__pycache__/
+/.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+/tests/fixture-renames.json

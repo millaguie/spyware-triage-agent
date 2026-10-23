@@ -1,0 +1,4 @@
+# Extra pins for the Docker image, on top of requirements.txt.
+# Keep MVT_VERSION in docs/manual.md in step with this file.
+mvt==2026.10.12
+pymobiledevice3==11.43.1

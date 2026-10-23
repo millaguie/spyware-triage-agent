@@ -1,0 +1,202 @@
+# Every place a check gets information from outside the phone. Every source the
+# code can reach must be listed here: the report prints a paragraph for each
+# source the case actually used (report.sources_used).
+#
+#   sends:     what leaves this computer. Only package names, SHA-256 hashes
+#              and the store country ever go out — never files or accounts.
+#   needs_key: environment variable with the key, or none. A source with a key
+#              is only asked when the variable is set and new-case was told yes.
+
+"mvt-indicators":
+  name: MVT indicators
+  url: https://github.com/mvt-project/mvt-indicators
+  sends: nothing (a download)
+  needs_key: none
+  license: MIT (mvt-project/mvt-indicators); each STIX file keeps its publisher's licence
+  explain: >-
+    The indicator lists MVT itself uses (downloaded with `mvt download-iocs`):
+    spyware domains, certificates and strings published by Amnesty, Access Now
+    and others. Downloaded in update-kb; an offline case reuses the last copy.
+
+"stalkerware-indicators":
+  name: stalkerware-indicators (Echap)
+  url: https://github.com/AssoEchap/stalkerware-indicators
+  sends: nothing (a download)
+  needs_key: none
+  license: CC-BY-4.0 (per the repository README)
+  explain: >-
+    Package names, signing certificates and YARA rules for commercial
+    stalkerware and monitoring apps, from the Echap non-profit. The YARA rules
+    run over the code inside every non-system APK.
+
+"android-sigma-rules":
+  name: android-sigma-rules (AndroDR)
+  url: https://github.com/android-sigma-rules/rules
+  sends: nothing (a download)
+  needs_key: none
+  license: CC-BY-4.0
+  explain: >-
+    Android malware indicators from Amnesty, Zimperium, PRODAFT, MalwareBazaar
+    and others: APK hashes, package names and signing certificates.
+
+"fdroid-index":
+  name: F-Droid index
+  url: https://f-droid.org/repo/index-v2.json
+  sends: nothing (a download)
+  needs_key: none
+  license: open data from a public repository
+  explain: >-
+    Downloaded to learn the official signing keys of every F-Droid app, so a
+    copy installed outside the store can be compared with the genuine build.
+
+"google-play":
+  name: Google Play
+  url: https://play.google.com/store/apps/details?id=<package>
+  sends: an app's package name and the store country
+  needs_key: none
+  license: not applicable (a public web page is read)
+  explain: >-
+    For an app installed outside the store, we ask Play whether the same
+    package name exists there: a real app in the store installed somewhere
+    else is a common fake pattern. Answers are kept in the case folder.
+
+"apple-app-store":
+  name: Apple App Store (iTunes lookup)
+  url: https://itunes.apple.com/lookup?bundleId=<bundle id>
+  sends: an app's bundle id and the store country
+  needs_key: none
+  license: not applicable (a public API is read)
+  explain: >-
+    For each iPhone app, whether the App Store still lists it in the chosen
+    country. Answers are kept in the case folder.
+
+"virustotal":
+  name: VirusTotal
+  url: https://www.virustotal.com/api/v3/files/<sha256>
+  sends: the SHA-256 of each app installed outside a store (never the APK)
+  needs_key: MVT_VT_API_KEY or VT_API_KEY
+  license: free API tier (VirusTotal records the lookups against the key)
+  explain: >-
+    The hash of every app that did not come from a store goes to VirusTotal.
+    This needs its own yes in new-case, because VirusTotal keeps the hashes
+    linked to the operator's key.
+
+"pymobiledevice3":
+  name: pymobiledevice3 (the iPhone itself)
+  url: https://github.com/doronz88/pymobiledevice3
+  sends: nothing to the internet; a USB command to the paired phone
+  needs_key: none
+  license: GPL-2.0-or-later (an external tool we run, like MVT)
+  explain: >-
+    The only source ios-quick uses: `apps list`, `profile list`,
+    `provision list` and `crash pull` over the trusted USB cable. Nothing
+    leaves this computer; the answers are copied into the case folder.
+
+"izzyondroid-index":
+  name: IzzyOnDroid index
+  url: https://apt.izzysoft.de/fdroid/repo/index-v2.json
+  sends: nothing (a download)
+  needs_key: none
+  license: open data from a public repository
+  explain: >-
+    A second F-Droid repository with its own builds. Its signing keys are
+    compared with apps installed outside a store, as for F-Droid.
+
+"cisa-kev":
+  name: CISA Known Exploited Vulnerabilities
+  url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+  sends: nothing (a download)
+  needs_key: none
+  license: public domain (US government work)
+  explain: >-
+    The vulnerabilities attackers are known to use. Its dates say when CISA
+    listed a hole, not when it was fixed, so they are never compared with the
+    phone; the fix comes from the Android bulletins (OSV). For iOS it is only
+    counted, as context.
+
+"osv-android":
+  name: OSV, Android security bulletins
+  url: https://osv-vulnerabilities.storage.googleapis.com/Android/all.zip
+  sends: nothing (a download)
+  needs_key: none
+  license: CC-BY-4.0 (OSV data); bulletins by Google
+  explain: >-
+    The Android security bulletins in machine-readable form. Each entry gives
+    the security patch level that fixes a vulnerability, which is compared
+    with the phone's patch.
+
+"endoflife-date":
+  name: endoflife.date
+  url: https://endoflife.date/api/v1/products/ios
+  sends: nothing (a download)
+  needs_key: none
+  license: MIT
+  explain: >-
+    The newest release of every iOS version, and whether Apple still updates
+    it. An iPhone behind the newest release of its own version is outdated.
+
+"malwarebazaar":
+  name: MalwareBazaar (abuse.ch)
+  url: https://mb-api.abuse.ch/api/v1/
+  sends: the SHA-256 of each app installed outside a store (never the APK)
+  needs_key: STA_ABUSECH_API_KEY
+  license: free API with a key; abuse.ch data is CC0
+  explain: >-
+    A public collection of malware samples. A hash it knows is an APK
+    somebody already reported as malware. Asked only with its own yes in
+    new-case, because abuse.ch logs the lookups.
+
+"threatfox":
+  name: ThreatFox (abuse.ch)
+  url: https://threatfox-api.abuse.ch/api/v1/
+  sends: domain names found inside the code of apps installed outside a store
+  needs_key: STA_ABUSECH_API_KEY
+  license: free API with a key; abuse.ch data is CC0
+  explain: >-
+    A list of servers that control malware. The only lookup that sends more
+    than package names, hashes and versions: the domains written in the code
+    of hand-installed apps. Same yes in new-case as MalwareBazaar.
+
+"koodous":
+  name: Koodous
+  url: https://docs.koodous.com
+  sends: nothing (evaluated, not used)
+  needs_key: none
+  license: not applicable
+  explain: >-
+    Evaluated on 2026-10-23 for APK reputation by hash and not used. The API
+    exists (GET https://developer.koodous.com/apks/<sha256>/ with
+    "Authorization: Token <key>"; the old api.koodous.com host answers 404),
+    but the free tier's limits are not published and it adds little to
+    VirusTotal and MalwareBazaar, which the check already asks.
+
+"exodus-trackers":
+  name: Exodus Privacy tracker signatures
+  url: https://reports.exodus-privacy.eu.org/api/trackers
+  sends: nothing (a download)
+  needs_key: none
+  license: published by Exodus Privacy; check their terms before redistributing
+  explain: >-
+    The code prefixes of about 430 advertising and analytics SDKs. Each app's
+    trackers are listed in its findings' evidence as context; they change no
+    severity.
+
+"saf":
+  name: Sysdiagnose Analysis Framework (EC-DIGIT-CSIRC)
+  url: https://github.com/EC-DIGIT-CSIRC/sysdiagnose
+  sends: nothing (runs on this computer)
+  needs_key: none
+  license: EUPL-1.2
+  explain: >-
+    Reads the whole iPhone sysdiagnose: every process it saw, and the apps
+    the logs and privacy records mention. Installed at a pinned commit.
+
+"quark-engine":
+  name: Quark-Engine
+  url: https://github.com/quark-engine/quark-engine
+  sends: nothing (runs on this computer)
+  needs_key: none
+  license: GPL-3.0
+  explain: >-
+    Optional (STA_QUARK=1). Follows an APK's code to name what it can do.
+    Runs only on apps that already have a red or amber finding.

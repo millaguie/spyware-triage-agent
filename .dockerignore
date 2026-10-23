@@ -1,0 +1,5 @@
+# The image only needs requirements*.txt and docker/. The repo is bind-mounted at run time.
+*
+!requirements.txt
+!requirements-image.txt
+!docker/

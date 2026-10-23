@@ -1,0 +1,2 @@
+{"app_name":"SpringBoard","timestamp":"2026-10-18 21:45:09.00 +0200","os_version":"iPhone OS 26.1 (23B85)","bug_type":"309","incident_id":"EEEEFFFF-1111-2222-3333-444455556666"}
+{"app_name":"SpringBoard","bug_type":"309","procName":"SpringBoard","procPath":"/System/Library/CoreServices/SpringBoard.app/SpringBoard","pid":33,"exception":{"type":"EXC_CRASH","signal":"SIGABRT"},"faultingThread":2}

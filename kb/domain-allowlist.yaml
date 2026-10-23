@@ -1,0 +1,49 @@
+# Domains that SDKs, CDNs and schemas put in almost every app's code. They are
+# dropped before matching and from the list kept in apk-scan.json. A subdomain
+# is dropped with its parent. Add a domain only when it is a well-known
+# service many genuine apps embed; never to silence one match in one case.
+- google.com
+- googleapis.com
+- gstatic.com
+- googleusercontent.com
+- googlesyndication.com
+- googleadservices.com
+- doubleclick.net
+- google-analytics.com
+- googletagmanager.com
+- firebaseio.com
+- firebase.com
+- app-measurement.com
+- crashlytics.com
+- android.com
+- youtube.com
+- facebook.com
+- facebook.net
+- fbcdn.net
+- instagram.com
+- whatsapp.net
+- apple.com
+- microsoft.com
+- live.com
+- amazonaws.com
+- amazon.com
+- cloudfront.net
+- akamaihd.net
+- cloudflare.com
+- github.com
+- githubusercontent.com
+- w3.org
+- xmlpull.org
+- apache.org
+- junit.org
+- kotlinlang.org
+- jetbrains.com
+- schema.org
+- mozilla.org
+- sentry.io
+- appsflyer.com
+- adjust.com
+- branch.io
+- onesignal.com
+- unity3d.com
+- applovin.com

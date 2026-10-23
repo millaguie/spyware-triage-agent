@@ -1,0 +1,9 @@
+# Account TYPES that are a signal by themselves, so an account of one of these
+# types raises `accounts-review` to amber even when there is only one Google
+# account. Types come from `dumpsys account`; they are app ids, never names.
+#
+# Start empty: nothing here unless you know what the type means on a real phone.
+# Family Link, for example, shows up as an app and a supervision role, not as an
+# account type, so it does not belong here. To add one you have seen:
+#
+# - {type: com.example.mdm.account, explain: "the work profile adds this type"}

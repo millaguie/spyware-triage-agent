@@ -1,0 +1,15 @@
+# Official signing certificates (SHA-256) of apps that fakes like to copy.
+# Only add a value you copied from the developer's own site, and write the
+# source URL. A wrong value creates false "possible fake" findings.
+#
+# To check an app you trust by hand, take an APK from the official store
+# and run:  apksigner verify --print-certs app.apk
+
+- package: org.thoughtcrime.securesms
+  name: Signal
+  source: https://signal.org/android/apk/
+  sha256:
+    # Current 4096-bit key.
+    - "4B:E4:F6:CD:5B:E8:44:08:3E:90:02:79:DC:82:2A:F6:5A:54:7F:EC:C2:6A:BA:7F:F1:F5:20:3A:45:51:8C:D8"
+    # Older 1024-bit key. Signal says old apksigner versions show this one.
+    - "29:F3:4E:5F:27:F2:11:B4:24:BC:5B:F9:D6:71:62:C0:EA:FB:A2:DA:35:AF:35:C1:64:16:FC:44:62:76:BA:26"

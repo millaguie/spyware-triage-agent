@@ -1,0 +1,22 @@
+{
+  "OrderedIdentifiers": [
+    "com.example.mdm.profile"
+  ],
+  "ProfileManifest": {
+    "com.example.mdm.profile": {
+      "Description": "Example MDM Enrollment Profile",
+      "IsActive": true
+    }
+  },
+  "ProfileMetadata": {
+    "com.example.mdm.profile": {
+      "PayloadDescription": "Enrols this iPhone in Example management",
+      "PayloadDisplayName": "Example MDM",
+      "PayloadOrganization": "Example Corporation",
+      "PayloadRemovalDisallowed": true,
+      "PayloadUUID": "11112222-3333-4444-5555-666677778888",
+      "PayloadVersion": 1
+    }
+  },
+  "Status": "Acknowledged"
+}
