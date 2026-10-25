@@ -1,6 +1,7 @@
 """Task 6.1-6.2: the owner's interview and the install timeline."""
 
 import json
+import os
 import stat
 
 from sta import checks, interview, report
@@ -21,7 +22,8 @@ def test_answers_live_outside_the_case_and_state_holds_no_content(case):
     interview.save(case, {"since": "2026-09", "signs": "my ex knew where I was"})
     path = interview.path(case)
     assert not path.is_relative_to(case.path)
-    assert stat.S_IMODE(path.stat().st_mode) == 0o600
+    if os.name != "nt":  # Windows has no mode bits: the profile's ACL protects the file
+        assert stat.S_IMODE(path.stat().st_mode) == 0o600
     assert interview.load(case)["signs"] == "my ex knew where I was"
     state = json.loads((case.path / "state.json").read_text())
     assert state["interview"]["answered"] == 2 and "my ex" not in json.dumps(state)

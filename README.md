@@ -1,17 +1,91 @@
 # spyware-triage-agent
 
-Guided phone check for spyware, stalkerware and fake apps. A small local LLM
-agent ([pi](https://pi.dev)) talks to the operator. A script (`./sta`) does
-the technical work with [MVT](https://mvt.re), [androidqf](https://github.com/mvt-project/androidqf)
-and [pymobiledevice3](https://github.com/doronz88/pymobiledevice3).
+Guided phone check for spyware, stalkerware and fake apps. An LLM agent
+([pi](https://pi.dev) or Claude Code) talks to the operator. A script (`./sta`)
+does the technical work with [MVT](https://mvt.re), [androidqf](https://github.com/mvt-project/androidqf)
+and [pymobiledevice3](https://github.com/doronz88/pymobiledevice3). The agent
+gets only the sta tools: no shell, no files.
 
-The phone data never leaves this computer. Use a model that runs on your own
-machine or LAN.
+The phone data stays on this computer when the model runs on this computer
+or on your own network. `./start` sets that up.
 
 > Use this tool only with the informed consent of the phone owner. MVT and
 > androidqf are under the MVT License 1.1, which forbids non-consensual use.
 
+## Start
+
+```bash
+./start                 # Windows, in PowerShell: .\start.ps1
+```
+
+The first run sets everything up, one question at a time:
+
+1. **Phone tools.** It runs `./install.sh`. On Linux with Docker it offers
+   the container mode (see below).
+2. **The model that guides the check.** Choose one:
+   - **A model on this computer, with Ollama.** `./start` reads the RAM and
+     the GPU (NVIDIA, AMD, Apple, or an integrated AMD GPU) and offers the
+     best model from `kb/models.json` that fits. It downloads the model to
+     `.sta/ollama`. It runs its own Ollama only while the check runs, on
+     `127.0.0.1:11435`. The `ollama` program must be installed
+     ([ollama.com](https://ollama.com/download)); without it, on Linux,
+     `./start` runs Ollama in a container.
+   - **A server on your own network** with an OpenAI-style API (vLLM,
+     llama.cpp, LM Studio, LiteLLM, Ollama).
+   - **A cloud provider:** OpenRouter, OpenAI, Anthropic or Mistral
+     (`kb/providers.json`). The case data leaves the computer. `./start` says
+     what goes out, and you must type `yes`.
+   - **An agent you already use:** pi with your own providers, or Claude
+     Code with your own account. `./start` changes nothing in their settings.
+3. **Who records the owner's answers.** By default the operator types them
+   in the terminal after the agent ends, and no model sees or changes them.
+   The other choice: the agent asks and records them.
+4. **A test.** One real turn: the model must call a sta tool.
+
+Every run after that:
+
+1. `./start` opens a case in your terminal (the owner's consent and what may
+   go to the internet), or continues the open one.
+2. It offers the owner's interview (optional, see below).
+3. It starts the agent, which guides the check step by step.
+4. After the agent ends, it asks the owner's questions in the terminal (if
+   you chose that), runs the cleanup, and prints the result.
+
+Settings: `.sta/config.json`. API keys: `.sta/secrets.env` (mode 600).
+`./start --setup` asks the setup questions again. `./start --test` tests the
+model again. `./start --explain` opens the agent only to explain the report
+of the last check. `./start` needs Python 3.11 or newer.
+
+When the check ends in the terminal (the owner's answers, cleanup), `./start`
+opens the agent again to explain the report: the result, each red and amber
+finding with what it means and what to do, then questions.
+
+### What the agent can do
+
+The agent gets the tools of the sta MCP server (`src/sta/mcp_server.py`)
+and nothing else:
+
+| Tool | Does |
+|---|---|
+| `next_step` | What to tell the user now, and the next tool |
+| `run_step` | Runs the current step. A long step goes on in the background |
+| `wait_step` | Waits for that step (up to 10 minutes per call) |
+| `next_question` | The next question for the owner (agent review mode) |
+| `record_answer` | Saves the owner's exact words for that question |
+| `show_finding` | One finding and what it means, phone text cleaned |
+| `explain_report` | At the end: the result and the main findings, to explain them |
+
+Every reply ends with `NEXT TOOL`, so a small model only has to copy it. No
+reply holds a command for the agent. Opening a case, passwords and purge stay
+in the operator's terminal. The prompt is `agent/GUIDE.md`.
+
+`./start --shell` is the old mode, for pi only: the agent gets `read` and
+`bash` with the rule "only `./sta`" (`agent/OPERATOR.md`). A free shell is not
+a security boundary.
+
 ## Install
+
+`./start` runs the installer for you. To run it by hand:
 
 ```bash
 ./install.sh            # system packages (sudo), mvt, pymobiledevice3, androidqf, .venv
@@ -27,11 +101,11 @@ computer needs only Docker, and pi for the agent.
 
 ```bash
 ./install.sh --docker        # build the image; run again to update the tools
-STA_RUNTIME=docker ./agent.sh
+./start
 ```
 
-`./sta` uses Docker by itself when `.venv` does not exist. Set
-`STA_RUNTIME=local` or `docker` to choose.
+`./sta` uses the mode `./install.sh` set up last (written in
+`.sta/runtime`). Set `STA_RUNTIME=local` or `docker` to choose.
 
 - `./sta` starts one container and keeps it running (`docker compose exec`).
   Stop it with `STA_DIR=$PWD docker compose down`.
@@ -46,23 +120,53 @@ STA_RUNTIME=docker ./agent.sh
   volumes `spyware-triage-agent_home` and `spyware-triage-agent_lockdown`. Delete them with
   `docker compose down -v` to forget all paired phones.
 - macOS: Docker Desktop cannot pass USB devices to a container. Use `./install.sh`.
-- pi stays on the computer: it needs your model settings and the network to
-  the model, and it only runs `./sta`.
+- The agent and the sta MCP server stay on the computer: the server needs
+  only `python3`, and calls `./sta`, which runs in the container.
+
+### On Windows
+
+Windows 10 or 11 on x86-64. In PowerShell:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+`install.ps1` uses winget for Python 3.12, Git, adb (platform-tools) and age,
+pipx for MVT and pymobiledevice3, and downloads androidqf with a fixed
+SHA-256. In Git Bash, `./install.sh` runs it for you.
+
+Then open a new terminal and start the check with `.\start.ps1` in
+PowerShell (type the `.\`: plain `start` is a PowerShell alias), or `./start`
+in Git Bash. `.\sta.ps1 <step>` runs single steps in PowerShell; in cmd.exe,
+`sta <step>`.
+
+Before you plug in a phone:
+
+- Android: a Pixel needs the
+  [Google USB driver](https://developer.android.com/studio/run/win-usb).
+  Other brands need their own driver.
+- iPhone: install **Apple Devices** from the Microsoft Store. It brings the
+  USB driver and the Apple Mobile Device Service, which does usbmuxd's job.
+  `./sta doctor` checks the service.
+
+Differences from Linux and macOS:
+
+- No container mode: Docker on Windows cannot pass USB devices.
+- Files in `.sta/secrets/` get no 600 mode (Windows has none). Your user
+  profile's permissions protect them: keep the folder under your own user,
+  not in a shared folder.
+- MVT keeps its indicators in `%LOCALAPPDATA%\mvt\mvt\indicators`.
+- saf (the full sysdiagnose reader) is optional and may not install on Windows.
+  Without it, the check reads only `shutdown.log`.
 
 ## Run a check
 
 ```bash
-./agent.sh
+./start
 ```
 
-The agent asks for consent and a short alias, then repeats this loop:
-`./sta next` → tell the user what to do with the phone → run the command.
-
-Change the model with `STA_PROVIDER` and `STA_MODEL` (default: `llm` /
-`qwen3.8-27b`). The agent only gets the `read` and `bash` tools, and its
-prompt (`agent/OPERATOR.md`) allows only `./sta` commands.
-
-You can also run every step by hand. `./sta next` always says what comes next.
+You can also run every step by hand, without an agent:
+`./sta new-case --alias <name>`, then `./sta next` always says what comes next.
 
 ### The owner's interview (optional)
 
@@ -370,7 +474,10 @@ The tests run `check-apps`, `triage`, `report` and `review` on
 `tests/fixtures/android-pixel`, an anonymised cut of a real androidqf
 acquisition (`tests/make_fixture.py` builds it from a case). The expected
 findings are written out in `tests/test_pipeline.py`: a rule change that
-moves or drops a finding fails there.
+moves or drops a finding fails there. `tests/test_mcp_server.py` drives the
+agent's tools through the same case, from `check-apps` to the review, with
+the CLI running for real underneath. GitHub Actions runs them on Linux,
+macOS and Windows.
 
 Dependency versions are pinned in `requirements.txt` (venv and image) and
 `requirements-image.txt` (MVT and pymobiledevice3 inside the image). The
@@ -388,6 +495,15 @@ meaning.
   alerts. `sta acquire` extracts the zip.
 - Tested on a real Android phone (Pixel 8a, Android 17). The iPhone steps,
   `sysdiagnose` included, were only tested with synthetic data.
+- Windows: the tests run there in CI (`.github/workflows/test.yml`), but no
+  real phone has been checked from Windows yet. androidqf's menus go through
+  ConPTY (pywinpty) instead of a pty.
+- The models in `kb/models.json` are not benchmarked yet: `./start` only
+  checks that a model calls a sta tool once. A small model may still skip
+  steps or change the owner's words. Keep the default review mode (the
+  operator types the answers) until the bench in `docs/plan-wizard.md` exists.
+- opencode is not offered: it could not limit the agent to the sta tools
+  (`docs/plan-wizard.md`, phase 1).
 
 ## Manual procedure
 

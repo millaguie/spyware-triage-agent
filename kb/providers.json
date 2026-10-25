@@ -1,0 +1,16 @@
+{
+  "_comment": [
+    "Cloud providers ./start offers. pi knows each of them by this name and reads the key",
+    "from key_env. The case data, and the owner's answers in agent review mode, go to them."
+  ],
+  "providers": [
+    {"name": "openrouter", "label": "OpenRouter", "key_env": "OPENROUTER_API_KEY",
+     "suggest": "qwen/qwen3.6-35b-a3b", "keys": "https://openrouter.ai/settings/keys"},
+    {"name": "openai", "label": "OpenAI", "key_env": "OPENAI_API_KEY",
+     "suggest": "gpt-5-mini", "keys": "https://platform.openai.com/api-keys"},
+    {"name": "anthropic", "label": "Anthropic", "key_env": "ANTHROPIC_API_KEY",
+     "suggest": "claude-haiku-5-5", "keys": "https://console.anthropic.com/settings/keys"},
+    {"name": "mistral", "label": "Mistral", "key_env": "MISTRAL_API_KEY",
+     "suggest": "mistral-medium-2604", "keys": "https://console.mistral.ai/api-keys"}
+  ]
+}

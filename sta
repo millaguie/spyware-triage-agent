@@ -1,18 +1,39 @@
 #!/usr/bin/env bash
 # Run the sta CLI, with the project's .venv (local) or in a container (docker).
-# STA_RUNTIME=local|docker chooses. Default: local if .venv exists, else docker.
+# STA_RUNTIME=local|docker chooses. Otherwise the mode ./install.sh last set up
+# (.sta/runtime); otherwise local if .venv exists, else docker.
+# On Windows this runs in Git Bash; PowerShell and cmd use sta.ps1 and sta.cmd.
 DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+python="$DIR/.venv/bin/python"
+windows=0
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*) windows=1; python="$DIR/.venv/Scripts/python.exe" ;;
+esac
+# Windows Python would print with the console code page otherwise.
+export PYTHONUTF8=1
 runtime="${STA_RUNTIME:-}"
+# .venv alone does not mean a local install: the tests use it too.
+if [[ -z "$runtime" && -f "$DIR/.sta/runtime" ]]; then
+  runtime="$(tr -d '[:space:]' <"$DIR/.sta/runtime")"
+  if [[ "$runtime" != local && "$runtime" != docker ]]; then
+    echo "ERROR: $DIR/.sta/runtime must say local or docker. Run ./install.sh again." >&2
+    exit 2
+  fi
+fi
 if [[ -z "$runtime" ]]; then
-  if [[ -x "$DIR/.venv/bin/python" ]]; then runtime=local; else runtime=docker; fi
+  if [[ -x "$python" || $windows == 1 ]]; then runtime=local; else runtime=docker; fi
 fi
 
 if [[ "$runtime" == local ]]; then
-  if [[ ! -x "$DIR/.venv/bin/python" ]]; then
+  if [[ ! -x "$python" ]]; then
     echo "ERROR: $DIR/.venv is missing. Run ./install.sh first, or use STA_RUNTIME=docker." >&2
     exit 2
   fi
-  exec "$DIR/.venv/bin/python" -m sta "$@"
+  exec "$python" -m sta "$@"
+fi
+if [[ $windows == 1 ]]; then
+  echo "ERROR: the container mode needs Linux (Docker on Windows cannot pass USB devices)." >&2
+  exit 2
 fi
 
 if ! command -v docker >/dev/null; then

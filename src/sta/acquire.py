@@ -1,25 +1,20 @@
 """Copy the data off the phone: androidqf for Android, an encrypted backup for iOS."""
 
 import csv
-import fcntl
 import getpass
 import hashlib
 import io
 import json
 import os
-import pty
 import re
 import secrets
-import select
-import signal
-import struct
 import sys
-import termios
 import time
 import zipfile
 from pathlib import Path
 
 from sta.common import Case, StepError, now, read_json, run, say, sha256_file, tail, which
+from sta.terminal import open_terminal
 
 # ---------------------------------------------------------------- Android
 
@@ -74,7 +69,7 @@ def acquire_android(case: Case, sms_backup: bool) -> None:
         check["archive_sha256"] = sha256_file(zips[-1])
         extract_archive(zips[-1], out)
 
-    case.state["acquisition"] = {"path": str(out.relative_to(case.path)),
+    case.state["acquisition"] = {"path": out.relative_to(case.path).as_posix(),
                                  "androidqf_exit": code, **check}
     case.mark("acquire")
     say(f"Acquisition: {out}")
@@ -109,11 +104,7 @@ def run_with_menus(cmd: list[str], *, cwd: Path, log: Path, answers: dict[str, i
                    timeout: int = 3 * 3600) -> int:
     """Run androidqf in a pseudo-terminal and answer its menus.
     Its output goes to the log, never to the agent."""
-    pid, fd = pty.fork()
-    if pid == 0:
-        os.chdir(cwd)
-        os.execv(cmd[0], cmd)
-    fcntl.ioctl(fd, termios.TIOCSWINSZ, struct.pack("HHHH", 50, 160, 0, 0))
+    term = open_terminal(cmd, cwd)
     answered: set[str] = set()
     recent = ""
     not_ready = 0
@@ -122,15 +113,11 @@ def run_with_menus(cmd: list[str], *, cwd: Path, log: Path, answers: dict[str, i
     with open(log, "a", encoding="utf-8") as handle:
         handle.write(f"\n### {now()} $ {' '.join(cmd)}\n")
         while time.monotonic() < deadline:
-            ready, _, _ = select.select([fd], [], [], 5)
-            if not ready:
-                continue
-            try:
-                data = os.read(fd, 65536)
-            except OSError:  # EIO: androidqf exited
+            data = term.read(5)
+            if data is None:  # androidqf exited
                 break
             if not data:
-                break
+                continue
             text = data.decode("utf-8", "replace")
             handle.write(text)
             handle.flush()
@@ -138,28 +125,26 @@ def run_with_menus(cmd: list[str], *, cwd: Path, log: Path, answers: dict[str, i
             if "Unable to get device state" in text:
                 not_ready += 1
                 if not_ready >= 36:  # about 3 minutes to tap "Allow" on the phone
-                    os.kill(pid, signal.SIGTERM)
+                    term.stop()
                     raise StepError("androidqf cannot reach the phone. Check that it is connected, "
                                     "unlocked and that USB debugging is allowed. Then run ./sta acquire again.")
             for label, downs in answers.items():
                 if label not in answered and f"{label}: " in recent:
                     time.sleep(0.5)  # let the menu draw its items
                     for _ in range(downs):
-                        os.write(fd, b"\x1b[B")
+                        term.write(b"\x1b[B")
                         time.sleep(0.2)
-                    os.write(fd, b"\r")
+                    term.write(b"\r")
                     answered.add(label)
                     recent = ""
             if "to finish" in recent:  # final "Press Enter to finish"
-                os.write(fd, b"\r")
+                term.write(b"\r")
                 recent = ""
         else:
-            os.kill(pid, signal.SIGTERM)
+            term.stop()
             raise StepError(f"androidqf ran for more than {timeout // 3600} hours. Stopped. See {log}.")
         handle.write(f"\n### menus answered: {sorted(answered)}\n")
-    os.close(fd)
-    _, status = os.waitpid(pid, 0)
-    return os.waitstatus_to_exitcode(status)
+    return term.close()
 
 
 def verify_androidqf_folder(folder: Path, log: Path) -> dict:
@@ -173,7 +158,7 @@ def verify_androidqf_folder(folder: Path, log: Path) -> dict:
     mismatches = []
     hashes = folder / "hashes.csv"
     if hashes.exists():
-        with open(hashes, newline="") as handle:
+        with open(hashes, newline="", encoding="utf-8") as handle:
             for row in csv.reader(handle):
                 if len(row) != 2:
                     continue
@@ -262,7 +247,7 @@ def read_password(case: Case) -> str:
     path = password_file(case)
     if not path.exists():
         raise StepError("No backup password stored. Run ./sta ios-password first.")
-    return path.read_text().strip()
+    return path.read_text(encoding="utf-8").strip()
 
 
 def ios_password(case: Case) -> None:
@@ -329,7 +314,7 @@ def acquire_ios(case: Case) -> None:
     backup = case.acquisition_dir / udid
     if not (backup / "Manifest.db").exists():
         raise StepError(f"No Manifest.db in {backup}. The backup did not finish. Last log lines:\n{tail(log)}")
-    case.state["acquisition"] = {"path": str(backup.relative_to(case.path)),
+    case.state["acquisition"] = {"path": backup.relative_to(case.path).as_posix(),
                                  "manifest_sha256": sha256_file(backup / "Manifest.db")}
     case.mark("acquire")
     say(f"Backup done: {backup}")
@@ -348,19 +333,20 @@ def sysdiagnose_ios(case: Case, skip: str | None) -> None:
     out = case.acquisition_dir / "sysdiagnose"
     out.mkdir(parents=True, exist_ok=True)
     log = case.logs_dir / "sysdiagnose.log"
-    say("Waiting for the sysdiagnose. On the iPhone, press and release BOTH volume buttons and the")
-    say("side button at the same time. The phone vibrates. Then wait: it takes up to 10 minutes.")
+    say("Waiting for the sysdiagnose. On the iPhone or iPad, press BOTH volume buttons and the side or top")
+    say("button at the same time, hold them about one second, and let go. The phone vibrates.")
+    say("Then wait: it takes up to 10 minutes. If the volume only changes, try again with both hands.")
     proc = run([pmd(), "crash", "sysdiagnose", "--udid", udid, "--timeout", "1200", str(out)],
                check=False, log=log)
     archives = sorted(out.rglob("*.tar.gz"))
     if proc.returncode != 0 or not archives:
         raise StepError(
             f"No sysdiagnose arrived (exit {proc.returncode}). Last log lines:\n{tail(log)}\n"
-            "Check the iPhone is unlocked and connected, then press the three buttons again and "
+            "Check the iPhone or iPad is unlocked and connected, then press the three buttons again and "
             "run ./sta sysdiagnose. If the owner cannot do it, run: "
             "./sta sysdiagnose --skip \"<reason>\"")
     archive = archives[-1]
-    case.state["sysdiagnose"] = {"path": str(archive.relative_to(case.path)),
+    case.state["sysdiagnose"] = {"path": archive.relative_to(case.path).as_posix(),
                                  "sha256": sha256_file(archive)}
     case.mark("sysdiagnose")
     say(f"Sysdiagnose saved: {archive}")
@@ -477,8 +463,9 @@ def cleanup(case: Case, verify_only: bool = False) -> None:
     if case.platform == "ios":
         if case.state.get("ios", {}).get("we_enabled_encryption"):
             udid = case.state["device"]["udid"]
-            say("Turning backup encryption off again, as it was before the check.")
-            say("The iPhone may ask for its passcode.")
+            say("Turning backup encryption off again, as it was before the check. The setting lives on the")
+            say("device, so it needs the cable: left on, the owner's next backup would ask for a password")
+            say("they never chose. The iPhone or iPad may ask for its passcode.")
             run([pmd(), "backup2", "encryption", "--udid", udid, "off", read_password(case)],
                 log=case.logs_dir / "ios-backup.log")
         forget_password(case)

@@ -11,6 +11,19 @@
 #        ./install.sh --docker   build the container image instead (Linux, needs docker)
 set -euo pipefail
 DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+# Windows (Git Bash): the PowerShell installer does the work.
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    args=()
+    for arg in "$@"; do
+      case "$arg" in
+        --check) args+=(-Check) ;;
+        --no-system) args+=(-NoSystem) ;;
+        *) echo "Unknown option on Windows: $arg" >&2; exit 2 ;;
+      esac
+    done
+    exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(cygpath -w "$DIR/install.ps1")" "${args[@]}" ;;
+esac
 BIN="$HOME/.local/bin"
 SYSTEM=1
 
@@ -23,6 +36,7 @@ for arg in "$@"; do
       export STA_DIR="$DIR"
       docker compose -f "$DIR/compose.yaml" build --pull
       docker compose -f "$DIR/compose.yaml" down
+      mkdir -p "$DIR/.sta" && echo docker >"$DIR/.sta/runtime"
       STA_RUNTIME=docker exec "$DIR/sta" doctor ;;
     *) echo "Unknown option: $arg" >&2; exit 2 ;;
   esac
@@ -137,9 +151,10 @@ install_pipx_tool pymobiledevice3
 install_androidqf
 install_saf
 install_venv
+mkdir -p "$DIR/.sta" && echo local >"$DIR/.sta/runtime"
 
 say "Checking"
 "$DIR/sta" doctor
 echo
 echo "Done. If 'mvt' is not found in a new terminal, open a new one (pipx changed your PATH)."
-echo "Start a check with: ./agent.sh"
+echo "Start a check with: ./start"

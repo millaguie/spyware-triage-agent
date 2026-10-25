@@ -3,6 +3,7 @@
 import hashlib
 import hmac
 import json
+import os
 
 from sta import checks, common, dumpsys
 
@@ -127,7 +128,8 @@ class TestAccounts:
         key = checks.account_key()
         path = common.SECRETS_DIR / checks.ACCOUNT_HMAC
         assert len(key) == 32 and path.exists()
-        assert path.stat().st_mode & 0o777 == 0o600
+        if os.name != "nt":  # Windows has no mode bits: the profile's ACL protects the file
+            assert path.stat().st_mode & 0o777 == 0o600
         assert checks.account_key() == key  # created once: the diff needs it stable
 
     def test_accounts_json_has_counts_and_hmacs_but_no_names(self, case):

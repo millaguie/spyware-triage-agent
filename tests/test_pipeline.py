@@ -356,3 +356,24 @@ def test_report_result_lines(sandbox, no_apkid):
     text = (case.path / "report.md").read_text()
     assert "**No red findings. 6 amber finding(s)**" in text
     assert "2. Remove apps that nobody recognises" in text  # amber next steps
+
+
+def test_guided_review_keeps_the_typed_words(triaged, capsys):
+    """The operator's typed answers go into the notes byte for byte: no model in between."""
+    report.report(triaged)
+    questions = report.open_questions(triaged)
+    typed = iter(["", "  Mi hermano la instaló «no sé»  ", *[f"answer {n}" for n in range(len(questions))]])
+    report.review_interactive(triaged, read=lambda prompt: next(typed))
+    notes = json.loads((triaged.path / "notes.json").read_text())["notes"]
+    assert notes[questions[0]["id"]]["text"] == "Mi hermano la instaló «no sé»"
+    assert triaged.done("review")
+    assert f"1/{len(questions)}" in capsys.readouterr().out
+
+
+def test_show_finding_gives_clean_fields_and_no_evidence(triaged, capsys):
+    report.show_finding(triaged, "f001", as_json=True)
+    shown = json.loads(capsys.readouterr().out)
+    assert shown["id"] == "F001" and shown["subject"].startswith("«")
+    assert set(shown) == {"id", "severity", "title", "subject", "detail", "why", "what_to_do"}
+    with pytest.raises(StepError, match="not a finding"):
+        report.show_finding(triaged, "F999")

@@ -2,15 +2,15 @@
 rules, android-sigma-rules indicators, F-Droid and IzzyOnDroid signers, and the
 OS data of sta.osinfo (exploited vulnerabilities, newest releases)."""
 
-import fcntl
 import json
 import os
+import sys
 import urllib.request
 import zipfile
 from pathlib import Path
 
 from sta import osinfo
-from sta.common import CACHE_DIR, Case, StepError, now, read_json, run, say, sha256_file, which, write_json
+from sta.common import CACHE_DIR, Case, StepError, now, read_json, run, say, sha256_file, try_lock, which, write_json
 
 # Indicator lists change every week, so we take the newest commit, not a fixed
 # one. What we record is which commit and which file hashes each case used:
@@ -59,11 +59,17 @@ def indicator_hashes() -> dict[str, str]:
 
 
 def mvt_indicator_dir() -> Path:
-    # Same rule as mvt/common/indicators.py.
+    # Same rule as mvt/common/indicators.py: MVT_DATA_FOLDER, else
+    # appdirs.user_data_dir("mvt"), which differs per system.
     if os.environ.get("MVT_DATA_FOLDER"):
         return Path(os.environ["MVT_DATA_FOLDER"]) / "indicators"
-    base = os.environ.get("XDG_DATA_HOME", str(Path.home() / ".local" / "share"))
-    return Path(base) / "mvt" / "indicators"
+    if os.name == "nt":
+        base = Path(os.environ.get("LOCALAPPDATA") or Path.home() / "AppData" / "Local") / "mvt" / "mvt"
+    elif sys.platform == "darwin":
+        base = Path.home() / "Library" / "Application Support" / "mvt"
+    else:
+        base = Path(os.environ.get("XDG_DATA_HOME") or Path.home() / ".local" / "share") / "mvt"
+    return base / "indicators"
 
 
 def count_indicator_files() -> int:
@@ -106,10 +112,8 @@ def update_kb(case: Case, skip_fdroid: bool = False) -> None:
     # could mix files from two commits, and a case would record hashes of
     # files it did not use.
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    with open(CACHE_DIR / ".lock", "a") as handle:
-        try:
-            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
+    with open(CACHE_DIR / ".lock", "a+", encoding="utf-8") as handle:
+        if not try_lock(handle):
             raise StepError("Another case is updating the indicators now. Wait until it ends, then run ./sta next.")
         refresh(case, skip_fdroid)
 
@@ -120,7 +124,7 @@ def refresh(case: Case, skip_fdroid: bool) -> None:
         if have == 0 or not (CACHE_DIR / "ioc.yaml").exists():
             raise StepError("This case is offline and there are no cached indicators. "
                             "Run ./sta update-kb once on a case with network, or copy kb/cache/ "
-                            "and ~/.local/share/mvt/indicators/ from another machine.")
+                            f"and {mvt_indicator_dir()} from another machine.")
         say(f"Offline case: using {have} cached MVT indicator files and kb/cache/.")
         case.mark("update-kb", mvt_indicator_files=have, offline=True,
                   sources=read_json(SOURCES_FILE) or {}, indicators=indicator_hashes())
@@ -158,7 +162,7 @@ def refresh(case: Case, skip_fdroid: bool) -> None:
         exodus = refresh_trackers()
 
     write_json(SOURCES_FILE, sources)
-    (CACHE_DIR / "UPDATED").write_text(now() + "\n")
+    (CACHE_DIR / "UPDATED").write_text(now() + "\n", encoding="utf-8")
     case.mark("update-kb", mvt_indicator_files=have, fdroid=fdroid, izzy=izzy, os_data=os_data, kev_android_unmapped=unmapped, exodus=exodus,
               sources=sources, indicators=indicator_hashes())
     say(f"Done. MVT indicator files: {have}. F-Droid signers: {fdroid}. IzzyOnDroid signers: {izzy}. "

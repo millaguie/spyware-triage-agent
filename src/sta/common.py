@@ -1,7 +1,6 @@
 """Shared helpers: paths, case state, subprocess calls and output."""
 
 import datetime as dt
-import fcntl
 import hashlib
 import json
 import os
@@ -15,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
-KB_DIR = ROOT / "kb"
+KB_DIR = Path(os.environ.get("STA_KB", ROOT / "kb"))
 CACHE_DIR = KB_DIR / "cache"
 CASES_DIR = Path(os.environ.get("STA_CASES", ROOT / "cases"))
 CURRENT_FILE = CASES_DIR / "CURRENT"
@@ -68,9 +67,36 @@ def which(name: str) -> str | None:
         return found
     # pipx tools, and tools in this venv (apkid), which may not be on PATH.
     for folder in (Path.home() / ".local" / "bin", Path(sys.executable).parent):
-        if (folder / name).exists():
-            return str(folder / name)
+        for candidate in (folder / name, folder / f"{name}.exe"):
+            if candidate.is_file():
+                return str(candidate)
     return None
+
+
+# Windows locks a byte range, and a locked byte cannot be read by anyone else.
+# Lock one far past the text, so the holder's name stays readable.
+LOCK_OFFSET = 1 << 20
+
+
+def try_lock(handle) -> bool:
+    """Take an exclusive lock on an open file, without waiting. False when
+    another process holds it. Closing the file (or the process ending) drops it."""
+    if os.name == "nt":
+        import msvcrt
+        handle.seek(LOCK_OFFSET)
+        try:
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+        except OSError:
+            return False
+        finally:
+            handle.seek(0)
+        return True
+    import fcntl
+    try:
+        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        return False
+    return True
 
 
 # A command never hangs forever on a bad cable or a stuck daemon. Quick
@@ -127,7 +153,7 @@ def redact(cmd: list[str]) -> list[str]:
 
 def tail(path: Path, lines: int = 15) -> str:
     try:
-        return "\n".join(path.read_text(errors="replace").splitlines()[-lines:])
+        return "\n".join(path.read_text(encoding="utf-8", errors="replace").splitlines()[-lines:])
     except OSError:
         return ""
 
@@ -190,11 +216,12 @@ class Case:
     def current(cls) -> "Case":
         # STA_CASE pins the case for one runner, so `./sta use` in another
         # terminal cannot switch it under the agent.
-        case_id = os.environ.get("STA_CASE") or (CURRENT_FILE.read_text().strip()
+        case_id = os.environ.get("STA_CASE") or (CURRENT_FILE.read_text(encoding="utf-8").strip()
                                                     if CURRENT_FILE.exists() else "")
         if not case_id:
             raise StepError("No open case. The operator opens one in a terminal with ./sta new-case.")
-        if "/" in case_id or case_id.startswith("."):
+        # ":" too: on Windows "C:" is a drive, and the path would leave cases/.
+        if any(c in case_id for c in "/\\:") or case_id.startswith("."):
             raise StepError(f"Bad case name {case_id!r}.")
         path = CASES_DIR / case_id
         if not (path / "state.json").exists():
@@ -209,9 +236,7 @@ class Case:
         and the operator, or two terminals) would each write state.json from
         an old copy. The lock goes away when the process ends."""
         handle = open(self.path / ".lock", "a+", encoding="utf-8")
-        try:
-            fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
+        if not try_lock(handle):
             handle.seek(0)
             raise StepError(f"Another ./sta command is running on this case ({handle.read().strip() or 'unknown'}). "
                             "Wait until it ends, then run ./sta next.")

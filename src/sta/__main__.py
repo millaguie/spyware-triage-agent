@@ -27,9 +27,12 @@ GUIDE = {
                 "  Android: a 'Full backup' screen appears. Tap 'Back up my data', leave the password empty.\n"
                 "  iPhone: it may ask for the passcode. This can take up to an hour.",
                 "./sta acquire"),
-    "sysdiagnose": ("Keep the iPhone unlocked and connected. When the command starts, press and release\n"
-                    "  both volume buttons and the side button at the same time. The phone vibrates.\n"
-                    "  It takes up to 10 minutes.",
+    "sysdiagnose": ("Keep the iPhone or iPad unlocked and connected. When the command starts, press\n"
+                    "  both volume buttons and the side or top button at the same time, hold them about\n"
+                    "  one second, and let go. The phone vibrates. It takes up to 10 minutes.\n"
+                    "  If the volume only changes, the three were not pressed at once: try again with\n"
+                    "  both hands. This step is optional: if it does not work, the operator can skip it\n"
+                    "  with ./sta sysdiagnose --skip \"<reason>\"",
                     "./sta sysdiagnose"),
     "decrypt": ("Nothing to do on the phone. You can disconnect it now.",
                 "./sta decrypt"),
@@ -41,12 +44,46 @@ GUIDE = {
     "report": ("Nothing to do.", "./sta report"),
     "review": ("Now we go through the findings that need the owner's explanation.",
                "./sta review"),
-    "cleanup": ("Reconnect the iPhone if it is disconnected, and unlock it.",
+    # Only the iPhone needs the cable at cleanup, and only to turn encryption off again.
+    "cleanup": ("Reconnect the iPhone or iPad if it is disconnected, and unlock it. The check turned on backup\n"
+                "  encryption, and that setting lives on the device: it must be turned off there. If not, the\n"
+                "  device keeps asking for a backup password the owner never chose, and nobody could restore\n"
+                "  its backups once this step deletes the password.",
                 "./sta cleanup"),
+    "cleanup-nocable": ("No cable needed: this step only removes the stored backup password.",
+                        "./sta cleanup"),
     # Android cleanup only prints what to do on the phone: no cable needed.
-    "cleanup-android": ("Nothing to connect. This shows how to remove the USB debugging permission.",
+    "cleanup-android": ("Remove this computer's USB debugging permission: on the phone, open Settings > System >\n"
+                        "  Developer options, tap 'Revoke USB debugging authorizations', then turn Developer\n"
+                        "  options off. Keep the phone connected and unlocked.",
                         "./sta cleanup"),
 }
+
+
+def guide(case: Case, step: str) -> tuple[str, str]:
+    if (step == "cleanup" and case.platform == "ios"
+            and not case.state.get("ios", {}).get("we_enabled_encryption")):
+        return GUIDE["cleanup-nocable"]
+    return GUIDE.get(f"{step}-{case.platform}") or GUIDE[step]
+
+
+def step_info(case: Case) -> dict:
+    """The current step as data, for the MCP server: it builds the agent's
+    reply from these fields and never shows a command."""
+    pending = [s for s in case.steps if not case.done(s)]
+    info = {"case": case.state["case_id"], "platform": case.platform,
+            "done": [s for s in case.steps if case.done(s)], "step": pending[0] if pending else None,
+            "tell": "", "report": None, "result": None, "interview": "interview" in case.state,
+            "ios_escape": bool(pending and pending[0] == "acquire" and case.platform == "ios"
+                               and case.done("ios-quick") and case.state.get("ios_acquire_fails", 0) >= 2)}
+    if pending:
+        tell, _ = guide(case, pending[0])
+        info["tell"] = " ".join(tell.split())
+    else:
+        from sta.report import result_line
+        info["report"] = str(case.path / "report.md")
+        info["result"] = result_line(case)
+    return info
 
 
 def cmd_next(case: Case) -> None:
@@ -62,7 +99,7 @@ def cmd_next(case: Case) -> None:
     if "interview" not in case.state and not case.done("triage"):
         say("OPTIONAL: the operator can ask the owner a few questions first. It cannot be run by the agent.")
         say("  TELL THE USER: if you want, run ./sta interview in your own terminal, then come back.")
-    tell, command = GUIDE.get(f"{step}-{case.platform}") or GUIDE[step]
+    tell, command = guide(case, step)
     say(f"NEXT STEP: {step}")
     say(f"TELL THE USER:\n  {tell}")
     say(f"THEN RUN:\n  {command}")
@@ -143,22 +180,36 @@ def cmd_new_case(args) -> None:
                   "network": network, "virustotal": virustotal, "abusech": abusech, "country": args.country.lower(),
                   "platform": None, "steps": {}}
     case.save()
-    CURRENT_FILE.write_text(case_id + "\n")
+    CURRENT_FILE.write_text(case_id + "\n", encoding="utf-8")
     say(f"Case {case_id} created in {path}.")
     say(f"Internet lookups: {'yes' if network else 'no'}. VirusTotal: {'yes' if virustotal else 'no'}. "
         f"abuse.ch: {'yes' if abusech else 'no'}.")
     say("Go back to the agent and continue.")
 
 
+def cmd_agent_used(case: Case, runner: str, model: str, where: str) -> None:
+    """./start records which agent saw the case data: the report lists it."""
+    # The report prints these in a table: no "|" or line break from a config file.
+    for value in (runner, model):
+        if not re.fullmatch(r"[\w .:/@+-]{1,100}", value):
+            fail(f"Bad agent name {value!r}.")
+    entry = {"runner": runner, "model": model, "where": where}
+    agents = case.state.setdefault("agents", [])
+    if entry not in [{k: a.get(k) for k in entry} for a in agents]:
+        agents.append({**entry, "at": now()})
+        case.save()
+    say(f"Agent recorded: {runner}, {model} ({where}).")
+
+
 def cmd_use(case_id: str) -> None:
     if not (CASES_DIR / case_id / "state.json").exists():
         fail(f"No case {case_id}. Run ./sta cases.")
-    CURRENT_FILE.write_text(case_id + "\n")
+    CURRENT_FILE.write_text(case_id + "\n", encoding="utf-8")
     say(f"Current case: {case_id}")
 
 
 def cmd_cases() -> None:
-    current = CURRENT_FILE.read_text().strip() if CURRENT_FILE.exists() else ""
+    current = CURRENT_FILE.read_text(encoding="utf-8").strip() if CURRENT_FILE.exists() else ""
     for path in sorted(CASES_DIR.glob("*/state.json")):
         mark = "*" if path.parent.name == current else " "
         say(f"{mark} {path.parent.name}")
@@ -191,6 +242,16 @@ def cmd_doctor() -> None:
         usbmuxd = os.path.exists("/var/run/usbmuxd") or run(["pgrep", "-x", "usbmuxd"], check=False).returncode == 0
         say(f"  {'OK ' if usbmuxd else 'WARN   '}  usbmuxd          "
             f"{'running' if usbmuxd else 'not running (needed for iPhone; it starts when one is plugged in)'}")
+    elif os.name == "nt":
+        # Windows has no usbmuxd: Apple's own service does that job, on port 27015.
+        import socket
+        try:
+            socket.create_connection(("127.0.0.1", 27015), timeout=1).close()
+            apple = True
+        except OSError:
+            apple = False
+        say(f"  {'OK ' if apple else 'WARN   '}  Apple service    "
+            f"{'running' if apple else 'not running (needed for iPhone: install Apple Devices from the Microsoft Store)'}")
     if not ok:
         fail("Some tools are missing. Run ./install.sh", 1)
     say("All tools found.")
@@ -222,6 +283,12 @@ def cmd_purge(case: Case, yes: bool) -> None:
 
 
 def main() -> None:
+    if os.name == "nt":
+        # The Windows console defaults to a code page that cannot print « » or
+        # app names in other scripts. ./sta sets PYTHONUTF8 too; this covers a
+        # direct `python -m sta`.
+        for stream in (sys.stdout, sys.stderr):
+            stream.reconfigure(encoding="utf-8", errors="replace")  # pyright: ignore[reportAttributeAccessIssue]
     parser = argparse.ArgumentParser(prog="sta", description=__doc__)
     sub = parser.add_subparsers(dest="cmd", required=True)
     nc = sub.add_parser("new-case", help="start a check for one phone")
@@ -237,7 +304,8 @@ def main() -> None:
                          "to abuse.ch (asked if missing, only when STA_ABUSECH_API_KEY is set)")
     nc.add_argument("--country", default=os.environ.get("STA_COUNTRY", "us"),
                     help="two-letter store country for lookups")
-    sub.add_parser("next", help="say what to do now")
+    nx = sub.add_parser("next", help="say what to do now")
+    nx.add_argument("--json", action="store_true", help="the current step as JSON (for the MCP server)")
     sub.add_parser("status", help="show case state")
     sub.add_parser("cases", help="list cases")
     use = sub.add_parser("use", help="switch current case")
@@ -262,6 +330,17 @@ def main() -> None:
                     help="accept a check without analyze (ios-quick only): the report warns that MVT did not run")
     rv = sub.add_parser("review")
     rv.add_argument("--done", action="store_true")
+    rv.add_argument("--json", action="store_true", help="the open questions as JSON (for the MCP server)")
+    rv.add_argument("--interactive", action="store_true",
+                    help="operator only: ask each question in this terminal and record the typed answer")
+    sub.add_parser("summary", help="the result and the red and amber findings, explained, as JSON (for the agent)")
+    fd = sub.add_parser("finding", help="one finding with its explanation, phone text cleaned")
+    fd.add_argument("finding_id")
+    fd.add_argument("--json", action="store_true")
+    au = sub.add_parser("agent-used", help="record which agent runner and model saw the case (./start does it)")
+    au.add_argument("--runner", required=True)
+    au.add_argument("--model", required=True)
+    au.add_argument("--where", required=True, choices=["local", "cloud"])
     note = sub.add_parser("note", help="record the owner's answer for a finding")
     note.add_argument("finding_id")
     note.add_argument("text")
@@ -298,8 +377,17 @@ def main() -> None:
             from sta.diff import diff
             return diff(args.old_case, args.new_case, CASES_DIR)
 
+        if args.cmd == "next" and args.json:
+            import json
+            try:
+                info = step_info(Case.current())
+            except StepError as exc:
+                info = {"case": None, "message": str(exc)}
+            return say(json.dumps(info, ensure_ascii=False))
+
         case = Case.current()
-        if args.cmd not in ("next", "status") and not (args.cmd == "purge" and not args.yes):
+        read_only = args.cmd in ("next", "status", "finding", "summary") or (args.cmd == "review" and args.json)
+        if not read_only and not (args.cmd == "purge" and not args.yes):
             case.lock(args.cmd)
         if args.cmd == "next":
             cmd_next(case)
@@ -351,8 +439,25 @@ def main() -> None:
             from sta.report import report
             report(case, partial=args.partial)
         elif args.cmd == "review":
-            from sta.report import review
-            review(case, args.done)
+            from sta import report
+            if args.json:
+                import json
+                say(json.dumps(report.open_questions(case), ensure_ascii=False))
+            elif args.interactive:
+                operator_terminal("record the owner's answers")
+                report.review_interactive(case)
+            else:
+                report.review(case, args.done)
+        elif args.cmd == "summary":
+            import json
+
+            from sta.report import summary
+            say(json.dumps(summary(case), ensure_ascii=False))
+        elif args.cmd == "finding":
+            from sta.report import show_finding
+            show_finding(case, args.finding_id, args.json)
+        elif args.cmd == "agent-used":
+            cmd_agent_used(case, args.runner, args.model, args.where)
         elif args.cmd == "note":
             from sta.report import add_note
             add_note(case, args.finding_id, args.text)
@@ -382,7 +487,8 @@ def main() -> None:
             evidence.unseal(case, Path(args.identity))
         elif args.cmd == "purge":
             cmd_purge(case, args.yes)
-        if args.cmd not in ("next", "status", "purge", "note", "interview", "verify", "export", "seal", "unseal"):
+        if args.cmd not in ("next", "status", "purge", "note", "interview", "verify", "export", "seal", "unseal",
+                            "finding", "summary", "agent-used") and not (args.cmd == "review" and args.json):
             say("\nNow run: ./sta next")
     except StepError as exc:
         fail(str(exc))

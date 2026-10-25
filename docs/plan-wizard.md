@@ -1,6 +1,43 @@
 # Plan: setup wizard and guided agent
 
-Status: phases 1 and 2 done, review 1 applied. Dates: 2026-10-18, 2026-10-19, 2026-10-22.
+Status: phases 1, 2, 3, 4 and 6 done, review 1 applied. Not done: the bench
+(phase 5) and the model table results (phase 7). Dates: 2026-10-18,
+2026-10-19, 2026-10-22, 2026-10-24.
+
+## What was built (2026-10-24)
+
+Differences from the plan below:
+
+- `.sta/config.json`, `kb/models.json` and `kb/providers.json` are JSON,
+  not YAML. `./start` runs with the computer's own python3 in the container
+  mode, which may lack PyYAML.
+- No llmfit. The fallback reads the hardware: `/proc/meminfo`, `nvidia-smi`,
+  the amdgpu memory files in `/sys/class/drm`, `sysctl` on macOS,
+  `GlobalMemoryStatusEx` on Windows. An integrated AMD GPU counts its GTT
+  memory, and Ollama gets `OLLAMA_IGPU_ENABLE=1`.
+- Ollama: the `ollama` program when it is installed (all systems), started
+  by `./start` with `OLLAMA_MODELS=.sta/ollama` on port 11435 and stopped
+  when `./start` ends. Without it, on Linux, the `ollama/ollama` image
+  (pinned version, `-rocm` for AMD), written to `.sta/compose.ollama.json`.
+- Choice B is split in two in the menu: a server on the local network, and
+  a cloud provider. Cloud providers use pi's own provider names and key
+  variables; keys go to `.sta/secrets.env`.
+- pi's limit for one MCP call is 60 s by default. The server entry sets
+  `"timeout"` (seconds) to 660 and `wait_step` waits 600 s. Claude Code gets
+  `MCP_TOOL_TIMEOUT`.
+- In choices A and B pi reads its MCP server from `.sta/pi/mcp.json`
+  (`PI_CODING_AGENT_DIR`), with `--no-approve`. With the operator's own pi,
+  it reads the repo's `.pi/mcp.json` with `--approve`.
+- `run_step` waits too, so a short step answers in one call. The background
+  job is a small wrapper process that writes the exit code to
+  `.sta/jobs/<case>.json`; a dead wrapper counts as a failed step.
+- `./sta next --json`, `./sta review --json`, `./sta finding <ID>` and
+  `./sta agent-used` give the server and `./start` data instead of text.
+  The report lists every agent that saw the case.
+- The model test is one real turn with the trace file `STA_MCP_TRACE`: it
+  passes when the model called `next_step`. It is not the bench.
+- The Docker volume move to `.sta/home` and `.sta/lockdown` is not done.
+
 
 ## Goal
 
@@ -395,6 +432,32 @@ Adversarial review of this plan and the code. What changed:
 
 Not a problem: `-remove-trusted yes` only skips copies of APKs signed with
 a known vendor key. Nothing is deleted from the phone.
+
+## Review 2 (2026-10-25)
+
+An adversarial review of the built `./start`, the MCP server and the CLI
+changes, in three parts.
+
+| Finding | Change |
+|---|---|
+| Step output could hold `NEXT TOOL:` from phone text, and a small model follows the first one | `clean()` turns `SAY:`, `WAIT FOR:` and `NEXT TOOL:` into plain words; every reply has one marker of each |
+| A job file left by a restart kept a reused pid "running" forever; two servers could start two steps | The wrapper inherits a `flock` on `.sta/jobs/<case>.lock` and holds it until it ends; no pid. `start_job` takes the lock first and refuses a second step |
+| `pid` written after the wrapper started could overwrite its exit code | The job file is written once before the wrapper starts, once by the wrapper at the end |
+| One bad request (`"params": []`, `./sta` missing) ended the server | `handle()` errors become a JSON-RPC error; `params` must be an object |
+| A "server on your own network" with a public address skipped the cloud warning | `./start` resolves the address: anything global counts as cloud and needs the typed `yes`. Warning for a key over `http://` |
+| Every saved key reached the runner | Only the key of the configured choice |
+| pi kept the conversation in `.sta/pi/sessions`, outside the case, and `purge` left it | pi always runs with `--no-session`. Claude Code cannot do that in a terminal session: the cloud warning and the last screen say it keeps a copy in `~/.claude` |
+| Anything on port 11435 was taken as our Ollama; a killed `./start` left Ollama running | `.sta/ollama.pid`, checked against `ps`: ours is used and stopped, anything else stops `./start`. SIGTERM and SIGHUP stop Ollama too, with its process group |
+| Ollama image pinned by tag only | Pinned by digest |
+| Smaller: Enter continued an old case, `start.ps1` took any Python, `install.ps1` ignored pip errors, `.sta/runtime` with CRLF, `:` in a case name, `\|` in the agent name, Ctrl+D in the review | Fixed |
+
+Not changed: Claude Code's `--tools ""` removes all its own tools (its
+help says so). Model tags are not pinned by digest yet.
+
+Round 2 agreed on all three parts. Its smaller points, fixed: `show_finding`
+also drops reply markers; a step's file is deleted only by its own run; on
+Windows the Ollama pid is checked with `tasklist`; Ctrl+C while Ollama
+starts stops it too.
 
 ## Risks
 

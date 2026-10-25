@@ -16,6 +16,8 @@ What changed since 2021:
 pipx install mvt
 pipx install pymobiledevice3
 mvt download-iocs          # indicators, stored in ~/.local/share/mvt/indicators
+                           # (macOS: ~/Library/Application Support/mvt/indicators,
+                           #  Windows: %LOCALAPPDATA%\mvt\mvt\indicators)
 ```
 
 Download androidqf from https://github.com/mvt-project/androidqf/releases/latest

@@ -15,10 +15,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def sta(sandbox, *args, stdin=""):
     env = {**os.environ, "STA_CASES": str(sandbox / "cases"), "STA_SECRETS": str(sandbox / "secrets"),
-           "PYTHONPATH": str(ROOT / "src")}
+           "PYTHONPATH": str(ROOT / "src"), "PYTHONUTF8": "1"}  # as ./sta sets it
     env.pop("STA_CASE", None)
     return subprocess.run([sys.executable, "-m", "sta", *args], capture_output=True, text=True,
-                          env=env, input=stdin, timeout=60)
+                          encoding="utf-8", env=env, input=stdin, timeout=60)
 
 
 def test_new_case_refuses_without_a_terminal(sandbox):
@@ -105,3 +105,30 @@ def test_note_rejects_unknown_id_through_cli(sandbox):
     assert proc.returncode == 0, proc.stderr
     notes = json.loads((case.path / "notes.json").read_text())["notes"]
     assert notes["F001"]["text"] == "the owner's words"
+
+
+def test_next_json_without_a_case(sandbox):
+    proc = sta(sandbox, "next", "--json")
+    assert proc.returncode == 0
+    assert json.loads(proc.stdout)["case"] is None
+
+
+def test_next_json_names_the_step_and_no_command(sandbox):
+    make_case(sandbox)
+    info = json.loads(sta(sandbox, "next", "--json").stdout)
+    assert info["case"] == "2026-01-01-test" and info["step"] == "check-apps"
+    assert "./sta" not in info["tell"]
+
+
+def test_agent_used_is_recorded_once(sandbox):
+    case = make_case(sandbox)
+    for _ in range(2):
+        assert sta(sandbox, "agent-used", "--runner", "pi", "--model", "m1", "--where", "local").returncode == 0
+    state = json.loads((case.path / "state.json").read_text())
+    assert [(a["runner"], a["model"], a["where"]) for a in state["agents"]] == [("pi", "m1", "local")]
+
+
+def test_review_interactive_refuses_without_a_terminal(sandbox):
+    make_case(sandbox)
+    proc = sta(sandbox, "review", "--interactive")
+    assert proc.returncode == 2 and "Only the operator" in proc.stderr

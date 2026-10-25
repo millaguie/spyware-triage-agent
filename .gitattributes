@@ -1,0 +1,7 @@
+# Shell scripts break with Windows line ends (bash reads the \r), so keep LF
+# even when Git for Windows converts text files. cmd.exe wants CRLF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.apk binary
+*.ips text eol=lf

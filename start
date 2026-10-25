@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# One command for a phone check: setup on the first run, then the agent.
+# Needs Python 3.11 or newer on this computer; the rest ./start installs.
+DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+python=""
+for candidate in "$DIR/.venv/bin/python" "$DIR/.venv/Scripts/python.exe" python3 python; do
+  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; sys.exit(sys.version_info < (3, 11))' 2>/dev/null; then
+    python="$candidate"; break
+  fi
+done
+if [[ -z "$python" ]]; then
+  echo "ERROR: Python 3.11 or newer is missing. Install it, then run ./start again." >&2
+  exit 2
+fi
+export PYTHONPATH="$DIR/src${PYTHONPATH:+:$PYTHONPATH}" PYTHONUTF8=1
+exec "$python" -m sta.setup "$@"

@@ -5,3 +5,5 @@ pyyaml==6.0.3
 apkid==3.1.0
 yara-python-dex==1.1.0
 pyaxmlparser==0.3.31
+# Windows only: ConPTY, for androidqf's keyboard menus (src/sta/terminal.py).
+pywinpty==3.1.0; sys_platform == "win32"

@@ -1,0 +1,19 @@
+{
+  "_comment": [
+    "Local models ./start can offer, best first. memory_gb: what the model needs to run with",
+    "the context below (weights plus room for the conversation). ./start offers the first",
+    "one that fits and the next one down. bench: result of ./sta bench (not written yet);",
+    "null means not tested with the sta tools. JSON, not YAML: ./start runs with the",
+    "computer's own python3, which may lack PyYAML."
+  ],
+  "context": 16384,
+  "models": [
+    {"tag": "qwen3.6:35b", "download_gb": 22.6, "memory_gb": 28, "bench": null},
+    {"tag": "gpt-oss:20b", "download_gb": 13.8, "memory_gb": 18, "bench": null},
+    {"tag": "qwen3.5:9b", "download_gb": 6.6, "memory_gb": 10, "bench": null},
+    {"tag": "qwen3:8b", "download_gb": 5.2, "memory_gb": 8, "bench": null},
+    {"tag": "qwen3.5:4b", "download_gb": 3.3, "memory_gb": 6, "bench": null},
+    {"tag": "granite4:micro", "download_gb": 2.1, "memory_gb": 4, "bench": null,
+     "note": "2026-10-18: called the tool 3 of 3 times; slow on an integrated GPU"}
+  ]
+}
